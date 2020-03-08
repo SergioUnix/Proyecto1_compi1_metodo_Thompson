@@ -54,42 +54,45 @@ namespace Proyecto_1
             while (iterador < cadena.Length)
             {
                 ///////////////////  Tipo de Caracter llave
-                if (cadena[iterador] == '{' )
+                if (cadena[iterador] == '{')
                 {
-                    concatenar =""+cadena[iterador];
-                    Class_nodos nuevo2 = new Class_nodos();
-                    nuevo2.setDato(concatenar);
-                    nuevo2.setId("Llave Apertura"); 
-                    Tokens.Add(nuevo2);///Conjuntos.Add(nuevo2);
-                    concatenar = "";
-
-                    iterador++;
-                    columna++;
-                    }  if(cadena[iterador] == '}')
-                    {
                     concatenar = "" + cadena[iterador];
                     Class_nodos nuevo2 = new Class_nodos();
                     nuevo2.setDato(concatenar);
-                    nuevo2.setId("Llave Cierre");
-                    Tokens.Add(nuevo2);///Conjuntos.Add(nuevo2);
+                    nuevo2.setId("Llave Apertura"); nuevo2.setColumna(columna); nuevo2.setFila(fila);
+                    Tokens.Add(nuevo2);
                     concatenar = "";
-                    iterador++;
-                    columna++;
+
+                    //iterador++;
+                    //columna++;
+                } if (cadena[iterador] == '}')
+                {
+                    
+                    concatenar = "" + cadena[iterador];
+                    Class_nodos nuevo2 = new Class_nodos();
+                    nuevo2.setDato(concatenar);
+                    nuevo2.setId("Llave Cierre"); nuevo2.setColumna(columna-concatenar.Length); nuevo2.setFila(fila);
+                    Tokens.Add(nuevo2);
+                    concatenar = "";
+                    //iterador++;
+                    //columna++;
 
                 }
 
 
-                    ///////////////////Tipo de Comentario 1
-                    if (cadena[iterador] == '/') {
+                ///////////////////Tipo de Comentario 1
+                if (cadena[iterador] == '/') {
                     //label4.Text = "detecto diagonal";
                     for (int j = 0; j < cadena.Length; j++) {
-                        concatenar = concatenar + cadena[iterador];
+                       
                         if (cadena[iterador] == '\n') {
-                           
+                            columna = 1; fila++;
                             break;
                         }
-                      iterador++;
-                      columna++;
+                        concatenar = concatenar + cadena[iterador];
+
+                        iterador++;
+                        columna++;
                     }
                     //ahora que concateno todo los comentarios los ingreso a la lista de comentarios
                     Class_nodos nuevo = new Class_nodos();
@@ -105,7 +108,7 @@ namespace Proyecto_1
                 {
                     for (int j = 0; j < cadena.Length; j++)
                     {
-                        if (cadena[iterador] == '\n') { columna = 0; fila++; }
+                        if (cadena[iterador] == '\n') { columna = 1; fila++; }         //////////////
                         concatenar = concatenar + cadena[iterador];
                         if (cadena[iterador] == '>')
                         { break; } iterador++;
@@ -124,14 +127,16 @@ namespace Proyecto_1
 
 
 
-
+                //////////////    Aca captamos los CONJ 
                 if (concatenar2 == "CONJ")
                 {
-                   // label4.Text = "detecto CONJ";
+                    columna = 1;
+                    // label4.Text = "detecto CONJ";
                     Class_nodos nuevo = new Class_nodos();
                     nuevo.setDato(concatenar2);
-                    nuevo.setId("CONJ"); nuevo.setColumna(columna-concatenar.Length);
+                    nuevo.setId("CONJ"); nuevo.setColumna(columna); nuevo.setFila(fila);
                     Tokens.Add(nuevo); //Conjuntos.Add(nuevo); 
+                    columna = 5;
                     concatenar = "";
                     for (int j = 0; j < cadena.Length; j++)
                     {
@@ -141,7 +146,7 @@ namespace Proyecto_1
                         {
                             Class_nodos nuevo2 = new Class_nodos();
                             nuevo2.setDato(concatenar);
-                            nuevo2.setId("Dos Puntos");
+                            nuevo2.setId("Dos Puntos"); nuevo2.setColumna(columna); nuevo2.setFila(fila);
                             Tokens.Add(nuevo2);///Conjuntos.Add(nuevo2);
                             concatenar = "";
                         }
@@ -150,12 +155,12 @@ namespace Proyecto_1
                         {
                             Class_nodos nuevo3 = new Class_nodos();
                             nuevo3.setDato(concatenar); comodin = concatenar;
-                            nuevo3.setId("Nom_conjunto");
+                            nuevo3.setId("Nom_conjunto"); nuevo3.setColumna(columna - concatenar.Length-1); nuevo3.setFila(fila);
                             Tokens.Add(nuevo3); concatenar = "";//Conjuntos.Add(nuevo3); 
                             concatenar = concatenar + cadena[iterador];
                             Class_nodos nuevo4 = new Class_nodos();
                             nuevo4.setDato(concatenar);
-                            nuevo4.setId("guion");
+                            nuevo4.setId("guion");nuevo4.setColumna(columna); nuevo4.setFila(fila);
                             Tokens.Add(nuevo4); //Conjuntos.Add(nuevo3);
                             concatenar = "";
                         }
@@ -163,7 +168,7 @@ namespace Proyecto_1
                         {
                             Class_nodos nuevo2 = new Class_nodos();
                             nuevo2.setDato(concatenar);
-                            nuevo2.setId("Guion_Mayor");
+                            nuevo2.setId("Guion_Mayor");nuevo2.setColumna(columna); nuevo2.setFila(fila);
                             Tokens.Add(nuevo2);///Conjuntos.Add(nuevo2);
                             concatenar = "";
                         }
@@ -171,33 +176,35 @@ namespace Proyecto_1
                         {
                             label4.Text = "detecto comillas";
                             Class_nodos nuevo2 = new Class_nodos();
-                            nuevo2.setDato(concatenar);
+                            nuevo2.setDato(concatenar); nuevo2.setColumna(columna - concatenar.Length); nuevo2.setFila(fila);
                             nuevo2.setId("CONJ"); nuevo2.setTipo(comodin); comodin = "";
-                            Tokens.Add(nuevo2); Conjuntos.Add(nuevo2);
+                            Tokens.Add(nuevo2); Conjuntos.Add(nuevo2); nuevo2.setFila(fila);
                             concatenar = "";
                             concatenar = concatenar + cadena[iterador];
                             Class_nodos nuevo5 = new Class_nodos();
-                            nuevo5.setDato(concatenar);
+                            nuevo5.setDato(concatenar);nuevo5.setColumna(columna); nuevo5.setFila(fila);
                             nuevo5.setId("Punto y Coma");
                             Tokens.Add(nuevo5);
                             concatenar = "";
 
                         }
 
+                        if (cadena[iterador] == '\n'){ break; }
 
-
-
-
-                        if (cadena[iterador] == '\n')
-                        { break; }
-                        
                         iterador++;
                         columna++;
-                    }
+                    } //cierro for dentro del if de CONJ
 
 
 
-                }
+                } //termina el if de CONJ
+
+
+
+
+
+
+
 
 
 
@@ -210,37 +217,38 @@ namespace Proyecto_1
 
                 if (cadena[iterador] != ' ' && cadena[iterador] != ':' && cadena[iterador] != '\n') { ///si detecto estos no concatena en la var concatenar2
                     concatenar2 = concatenar2 + cadena[iterador]; }
-                if (cadena[iterador] == ' ' || cadena[iterador] == ':'|| cadena[iterador] == '\n') { // si detecto estos me setea concatenar2
-                    if (cadena[iterador] == '\n') { columna=1; fila++; }
-              // richTextBox2.Text = richTextBox2.Text +concatenar2+ '\n'; //Verifico que es lo que capta
-                    concatenar2 = ""; }
+                if (cadena[iterador] == ' ' || cadena[iterador] == ':' || cadena[iterador] == '\n') { // si detecto estos me setea concatenar2
+                if (cadena[iterador] == '\n') { columna = 1; fila++; }
+                   // richTextBox2.Text = richTextBox2.Text +concatenar2+ '\n'; //Verifico que es lo que capta
+                   concatenar2 = ""; }
 
-                
+
 
                 iterador++;
                 columna++;
-                   
-            }
+
+            } // Aca se cierra el while
+        
 
            richTextBox2.Text = richTextBox2.Text + "---------- Comentarios \n";
 
             foreach (Class_nodos pa in Comentarios)
             {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + '\n';
+                richTextBox2.Text = richTextBox2.Text + pa.getDato() +'\n';
              }
 
             richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
             foreach (Class_nodos pa in Tokens)
             {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + '\n';
+                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
             }
 
             richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
 
             foreach (Class_nodos pa in Conjuntos)
             {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + '\n';
+                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
             }
 
 
