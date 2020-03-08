@@ -20,6 +20,9 @@ namespace Proyecto_1
         string concatenar2 = "";
         string comodin = "";
 
+        int columna = 1;
+        int fila = 1;
+
         List<Class_nodos> Conjuntos = new List<Class_nodos>();
         List<Class_nodos> Expresiones = new List<Class_nodos>();
         List<Class_nodos> Lexemas = new List<Class_nodos>();
@@ -61,6 +64,7 @@ namespace Proyecto_1
                     concatenar = "";
 
                     iterador++;
+                    columna++;
                     }  if(cadena[iterador] == '}')
                     {
                     concatenar = "" + cadena[iterador];
@@ -69,6 +73,8 @@ namespace Proyecto_1
                     nuevo2.setId("Llave Cierre");
                     Tokens.Add(nuevo2);///Conjuntos.Add(nuevo2);
                     concatenar = "";
+                    iterador++;
+                    columna++;
 
                 }
 
@@ -82,7 +88,8 @@ namespace Proyecto_1
                            
                             break;
                         }
-                        iterador++;
+                      iterador++;
+                      columna++;
                     }
                     //ahora que concateno todo los comentarios los ingreso a la lista de comentarios
                     Class_nodos nuevo = new Class_nodos();
@@ -97,7 +104,9 @@ namespace Proyecto_1
                 if (cadena[iterador] == '<')
                 {
                     for (int j = 0; j < cadena.Length; j++)
-                    { concatenar = concatenar + cadena[iterador];
+                    {
+                        if (cadena[iterador] == '\n') { columna = 0; fila++; }
+                        concatenar = concatenar + cadena[iterador];
                         if (cadena[iterador] == '>')
                         { break; } iterador++;
                     }
@@ -121,7 +130,7 @@ namespace Proyecto_1
                    // label4.Text = "detecto CONJ";
                     Class_nodos nuevo = new Class_nodos();
                     nuevo.setDato(concatenar2);
-                    nuevo.setId("CONJ");
+                    nuevo.setId("CONJ"); nuevo.setColumna(columna-concatenar.Length);
                     Tokens.Add(nuevo); //Conjuntos.Add(nuevo); 
                     concatenar = "";
                     for (int j = 0; j < cadena.Length; j++)
@@ -181,7 +190,9 @@ namespace Proyecto_1
 
                         if (cadena[iterador] == '\n')
                         { break; }
+                        
                         iterador++;
+                        columna++;
                     }
 
 
@@ -200,34 +211,36 @@ namespace Proyecto_1
                 if (cadena[iterador] != ' ' && cadena[iterador] != ':' && cadena[iterador] != '\n') { ///si detecto estos no concatena en la var concatenar2
                     concatenar2 = concatenar2 + cadena[iterador]; }
                 if (cadena[iterador] == ' ' || cadena[iterador] == ':'|| cadena[iterador] == '\n') { // si detecto estos me setea concatenar2
+                    if (cadena[iterador] == '\n') { columna=1; fila++; }
               // richTextBox2.Text = richTextBox2.Text +concatenar2+ '\n'; //Verifico que es lo que capta
                     concatenar2 = ""; }
 
                 
 
                 iterador++;
+                columna++;
                    
             }
 
-          //  richTextBox2.Text = richTextBox2.Text + "---------- Comentarios \n";
+           richTextBox2.Text = richTextBox2.Text + "---------- Comentarios \n";
 
-            //foreach (Class_nodos pa in Comentarios)
-            //{
-            //    richTextBox2.Text = richTextBox2.Text + pa.getDato()+ '\n';
-            // }
+            foreach (Class_nodos pa in Comentarios)
+            {
+                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + '\n';
+             }
 
             richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
             foreach (Class_nodos pa in Tokens)
             {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "                    ID: " + pa.getId() + '\n';
+                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + '\n';
             }
 
             richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
 
             foreach (Class_nodos pa in Conjuntos)
             {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + '\n';
+                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + '\n';
             }
 
 
