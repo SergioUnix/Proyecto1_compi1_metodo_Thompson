@@ -1,0 +1,9 @@
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\bin\Debug\Proyecto 1.exe.config
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\bin\Debug\Proyecto 1.exe
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\bin\Debug\Proyecto 1.pdb
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto 1.csprojResolveAssemblyReference.cache
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto_1.Form1.resources
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto_1.Properties.Resources.resources
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto 1.csproj.GenerateResource.Cache
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto 1.exe
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto 1.pdb
