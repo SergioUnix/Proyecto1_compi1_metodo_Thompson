@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AFN.cs" />
     <Compile Include="Class_nodos.cs" />
     <Compile Include="Class_transiciones.cs" />
     <Compile Include="Form1.cs">

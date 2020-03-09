@@ -71,7 +71,7 @@ namespace Proyecto_1
                     concatenar = "" + cadena[iterador];
                     Class_nodos nuevo2 = new Class_nodos();
                     nuevo2.setDato(concatenar);
-                    nuevo2.setId("Llave Cierre"); nuevo2.setColumna(columna-concatenar.Length); nuevo2.setFila(fila);
+                    nuevo2.setId("Llave Cierre"); nuevo2.setColumna(columna); nuevo2.setFila(fila);
                     Tokens.Add(nuevo2);
                     concatenar = "";
                     //iterador++;
@@ -81,7 +81,7 @@ namespace Proyecto_1
 
 
                 ///////////////////Tipo de Comentario 1
-                if (cadena[iterador] == '/') {
+                if (cadena[iterador] == '/' && cadena[iterador+1] == '/') {
                     //label4.Text = "detecto diagonal";
                     for (int j = 0; j < cadena.Length; j++) {
                        
@@ -131,7 +131,6 @@ namespace Proyecto_1
                 if (concatenar2 == "CONJ")
                 {
                     columna = 1;
-                    // label4.Text = "detecto CONJ";
                     Class_nodos nuevo = new Class_nodos();
                     nuevo.setDato(concatenar2);
                     nuevo.setId("CONJ"); nuevo.setColumna(columna); nuevo.setFila(fila);
@@ -174,7 +173,7 @@ namespace Proyecto_1
                         }
                         if (cadena[iterador] == ';')
                         {
-                            label4.Text = "detecto comillas";
+                     
                             Class_nodos nuevo2 = new Class_nodos();
                             nuevo2.setDato(concatenar); nuevo2.setColumna(columna - concatenar.Length); nuevo2.setFila(fila);
                             nuevo2.setId("CONJ"); nuevo2.setTipo(comodin); comodin = "";
@@ -202,6 +201,34 @@ namespace Proyecto_1
 
 
 
+                //////  Guardo Expresiones Regulares
+                if (concatenar2 == "->")
+                {
+                    Class_nodos nuevo3 = new Class_nodos(); nuevo3.setDato("-"); nuevo3.setId("guion");
+                    nuevo3.setColumna(columna - 2); nuevo3.setFila(fila); Tokens.Add(nuevo3); concatenar = "";//Conjuntos.Add(nuevo3); 
+                    Class_nodos nuevo4 = new Class_nodos(); nuevo4.setDato(">"); nuevo4.setId("mayor que");
+                    nuevo4.setColumna(columna - 1); nuevo4.setFila(fila); Tokens.Add(nuevo4); concatenar = "";//Conjuntos.Add(nuevo3); 
+                    for (int j = 0; j < cadena.Length; j++)
+                    {
+                        if (cadena[iterador] != ' ' && cadena[iterador] != ';' && cadena[iterador] != '\n') { concatenar = concatenar + cadena[iterador]; } //si es diferente a espacio concatena
+                        if (cadena[iterador] == '\n') {  break; }
+                        iterador++;
+                       // columna++;
+
+                    } /// se cierra el for
+
+                            Class_nodos nuevo2 = new Class_nodos();
+                            nuevo2.setDato(concatenar);
+                            nuevo2.setId("ER"); nuevo2.setColumna(columna); nuevo2.setFila(fila);
+                            Expresiones.Add(nuevo2);///Conjuntos.Add(nuevo2);
+                            concatenar = "";
+
+                    columna = 1;
+                } //se cierra el if de expresiones
+
+
+
+                
 
 
 
@@ -211,15 +238,11 @@ namespace Proyecto_1
 
 
 
-
-
-
-
-                if (cadena[iterador] != ' ' && cadena[iterador] != ':' && cadena[iterador] != '\n') { ///si detecto estos no concatena en la var concatenar2
+                    if (cadena[iterador] != ' ' && cadena[iterador] != ':' && cadena[iterador] != '\n') { ///si detecto estos no concatena en la var concatenar2
                     concatenar2 = concatenar2 + cadena[iterador]; }
                 if (cadena[iterador] == ' ' || cadena[iterador] == ':' || cadena[iterador] == '\n') { // si detecto estos me setea concatenar2
-                if (cadena[iterador] == '\n') { columna = 1; fila++; }
-                   // richTextBox2.Text = richTextBox2.Text +concatenar2+ '\n'; //Verifico que es lo que capta
+                if (cadena[iterador] == '\n') { columna = 0; fila++; }
+                 //  richTextBox2.Text = richTextBox2.Text +concatenar2+ '\n'; //Verifico que es lo que capta
                    concatenar2 = ""; }
 
 
@@ -228,32 +251,46 @@ namespace Proyecto_1
                 columna++;
 
             } // Aca se cierra el while
-        
+      
 
-           richTextBox2.Text = richTextBox2.Text + "---------- Comentarios \n";
 
-            foreach (Class_nodos pa in Comentarios)
-            {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() +'\n';
-             }
 
-            richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
+
+
+
+        richTextBox3.Text = richTextBox3.Text + "------------- Tokens \n";
 
             foreach (Class_nodos pa in Tokens)
             {
                 richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
             }
 
-            richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
+           richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
 
             foreach (Class_nodos pa in Conjuntos)
             {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+          richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
             }
 
 
 
 
+            List<string> help= new List<string>();
+                    richTextBox3.Text = richTextBox3.Text + "------------- Expresiones \n";
+
+            foreach (Class_nodos pa in Expresiones)
+            {
+                 richTextBox3.Text = richTextBox3.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+
+                help = pa.arregloExpresiones();
+               
+            }
+
+
+
+            foreach (string dar in help) {
+                richTextBox3.Text = richTextBox3.Text + dar + "\n";
+            }
 
 
 

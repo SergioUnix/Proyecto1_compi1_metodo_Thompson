@@ -8,7 +8,11 @@ namespace Proyecto_1
 {
     public class Class_nodos
     {
-        
+        Class_nodos next = new Class_nodos();
+        Class_nodos anterior = new Class_nodos();
+
+
+
         int estado;
         string Id;
         string Tipo;
@@ -26,9 +30,13 @@ namespace Proyecto_1
             this.Id = "";
             this.dato = "";
             this.Tipo = "";
+            this.estado = 0;
             this.columna = 0;
             this.fila = 0;
 
+
+            next = null;
+            anterior = null;
 
 
         }
@@ -92,6 +100,95 @@ namespace Proyecto_1
         public int getFila()
         {
             return this.fila;
+        }
+
+
+        public void setNext(Class_nodos b)
+        {
+            this.next = b;
+        }
+        public Class_nodos getNext()
+        {
+            return this.next;
+        }
+
+        public void setAnterior(Class_nodos b)
+        {
+            this.anterior = b;
+        }
+        public Class_nodos getAnterior()
+        {
+            return this.anterior;
+        }
+
+
+
+
+
+        public List<string> arregloExpresiones() {
+            List<string> result = new List<string>();    //genero esta lista para separar los id de las expresiones
+            string opera = getDato();                   ///agarro el string de expresiones
+            char[] cadena = opera.ToCharArray();
+            string concatenar = "";
+
+            for (int i = 0; i < opera.Length; i++) {
+
+                if (cadena[i] == '.' || cadena[i] == '|' || cadena[i] == '?' || cadena[i] == '*' || cadena[i] == '+') {
+                    if (concatenar.Length > 1) { result.Add(concatenar); concatenar = ""; }
+                    concatenar = ""+cadena[i];
+                    result.Add(concatenar);
+                    concatenar = "";
+                   
+                    
+                }
+                if (cadena[i] == '"') {
+                    if (concatenar.Length > 1) { result.Add(concatenar); concatenar = ""; }
+                    i++;
+                    for (int j = 0; j < opera.Length; j++)
+                    {
+                        if (cadena[i] == '"') { break; }
+                        concatenar = concatenar + cadena[i];
+                        i++;
+                    } result.Add(concatenar); concatenar = "";
+
+                
+
+                }
+                if (cadena[i] == '{')
+                {
+                    if (concatenar.Length > 1) { result.Add(concatenar); concatenar = ""; }
+                    i++;
+                    for (int j = 0; j < opera.Length; j++)
+                    {
+                        if (cadena[i] == '}') { break; }
+                        concatenar = concatenar + cadena[i];
+                        i++;
+                    } result.Add(concatenar); concatenar = "";
+                   
+
+                }
+
+                if (cadena[i] != '.' || cadena[i] != '|' || cadena[i] != '?' || cadena[i] != '*' || cadena[i] != '+')
+                {
+                    concatenar = concatenar + cadena[i];
+                }
+                if (cadena[i] == '.' || cadena[i] == '|' || cadena[i] == '?' || cadena[i] == '*' || cadena[i] == '+' || cadena[i] == '}' || cadena[i] == '"')
+                {
+                    concatenar = "";
+                }
+
+
+
+
+            }
+
+
+
+
+
+
+
+            return result; 
         }
 
 

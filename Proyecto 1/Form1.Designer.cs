@@ -44,6 +44,7 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -51,7 +52,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(832, 571);
+            this.button1.Location = new System.Drawing.Point(700, 469);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(161, 38);
             this.button1.TabIndex = 0;
@@ -79,7 +80,7 @@
             this.generarGraphvizToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1069, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1065, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,7 +121,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(614, 70);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(351, 201);
+            this.pictureBox1.Size = new System.Drawing.Size(337, 148);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -129,7 +130,7 @@
             // 
             this.pictureBox2.Location = new System.Drawing.Point(614, 304);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(351, 181);
+            this.pictureBox2.Size = new System.Drawing.Size(337, 149);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
@@ -154,9 +155,9 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(13, 521);
+            this.richTextBox2.Location = new System.Drawing.Point(16, 521);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(556, 234);
+            this.richTextBox2.Size = new System.Drawing.Size(463, 344);
             this.richTextBox2.TabIndex = 7;
             this.richTextBox2.Text = "";
             // 
@@ -172,18 +173,27 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(609, 508);
+            this.label4.Location = new System.Drawing.Point(538, 480);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 17);
             this.label4.TabIndex = 9;
             this.label4.Text = "label4";
             // 
+            // richTextBox3
+            // 
+            this.richTextBox3.Location = new System.Drawing.Point(485, 521);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(551, 344);
+            this.richTextBox3.TabIndex = 10;
+            this.richTextBox3.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1069, 767);
+            this.ClientSize = new System.Drawing.Size(1065, 894);
             this.ControlBox = false;
+            this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.richTextBox2);
@@ -227,6 +237,7 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox richTextBox3;
     }
 }
 
