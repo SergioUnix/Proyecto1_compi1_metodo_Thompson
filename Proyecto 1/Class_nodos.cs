@@ -8,8 +8,10 @@ namespace Proyecto_1
 {
     public class Class_nodos
     {
-        Class_nodos next = new Class_nodos();
-        Class_nodos anterior = new Class_nodos();
+         Class_nodos next1;
+
+         Class_nodos next2;
+        
 
 
 
@@ -17,11 +19,17 @@ namespace Proyecto_1
         string Id;
         string Tipo;
         string dato;
-
         int columna;
         int fila;
 
+       
         List<Class_transiciones> transiciones = new List<Class_transiciones>();
+
+
+        int contador_nodo;
+        public static int cont;
+        private string tipoNodo; // tipo para nodos de afn
+        private AFN automata;
 
 
         public Class_nodos()
@@ -33,12 +41,18 @@ namespace Proyecto_1
             this.estado = 0;
             this.columna = 0;
             this.fila = 0;
+            this.tipoNodo = "";
+ 
 
 
-            next = null;
-            anterior = null;
+        }
 
 
+
+        public void aumentarcount()
+        {
+          contador_nodo = cont;
+            cont++;
         }
 
         public void addTransicion(Class_transiciones b)
@@ -103,25 +117,40 @@ namespace Proyecto_1
         }
 
 
-        public void setNext(Class_nodos b)
+        public void setNext1(Class_nodos next1)
         {
-            this.next = b;
+            this.next1 = next1;
         }
-        public Class_nodos getNext()
+        public Class_nodos getNext1()
+       {
+            return this.next1;
+       }
+
+        public void setNext2(Class_nodos next2)
         {
-            return this.next;
+            this.next2 = next2;
+        }
+        public Class_nodos getNext2()
+        {
+          return this.next2;
         }
 
-        public void setAnterior(Class_nodos b)
+
+
+        public void setTipoNodo(string n)
         {
-            this.anterior = b;
+            this.tipoNodo = n;
         }
-        public Class_nodos getAnterior()
+        public string getTipoNodo()
         {
-            return this.anterior;
+            return this.tipoNodo;
         }
 
 
+        public int getContadorNodo()
+        {
+        return this.contador_nodo;
+        }
 
 
 

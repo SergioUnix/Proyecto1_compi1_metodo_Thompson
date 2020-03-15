@@ -28,6 +28,7 @@ namespace Proyecto_1
         List<Class_nodos> Lexemas = new List<Class_nodos>();
         List<Class_nodos> Comentarios = new List<Class_nodos>();
 
+        List<Class_nodos> Nodos_afn = new List<Class_nodos>();
 
 
 
@@ -238,7 +239,7 @@ namespace Proyecto_1
 
 
 
-                    if (cadena[iterador] != ' ' && cadena[iterador] != ':' && cadena[iterador] != '\n') { ///si detecto estos no concatena en la var concatenar2
+                    if (cadena[iterador] != ' ' && cadena[iterador] != ':' && cadena[iterador] != '\n' ) { ///si detecto estos no concatena en la var concatenar2
                     concatenar2 = concatenar2 + cadena[iterador]; }
                 if (cadena[iterador] == ' ' || cadena[iterador] == ':' || cadena[iterador] == '\n') { // si detecto estos me setea concatenar2
                 if (cadena[iterador] == '\n') { columna = 0; fila++; }
@@ -258,7 +259,7 @@ namespace Proyecto_1
 
 
 
-        richTextBox3.Text = richTextBox3.Text + "------------- Tokens \n";
+        richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
             foreach (Class_nodos pa in Tokens)
             {
@@ -274,23 +275,106 @@ namespace Proyecto_1
 
 
 
-
-            List<string> help= new List<string>();
-                    richTextBox3.Text = richTextBox3.Text + "------------- Expresiones \n";
+            //////////////Lista de expresion regular
+            List<string>  expresionLista= new List<string>();  /// tengo la expresion solo como una lista de string, separadas de comillas y llaves
+            richTextBox3.Text = richTextBox3.Text + "------------- Expresiones \n";
 
             foreach (Class_nodos pa in Expresiones)
             {
                  richTextBox3.Text = richTextBox3.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
 
-                help = pa.arregloExpresiones();
-               
+
+
+                expresionLista= pa.arregloExpresiones(); //por cada iteración obtengo una lista de string de las ER
+
+                foreach (string dar in expresionLista)   //convierto a nodos la lista de string y les coloco atributos como tipo de nodo y si son unarios o binarios
+                {
+
+
+                          if (dar == "*" )
+                          {
+
+                        Class_nodos n = new Class_nodos();
+                        n.setDato(dar);
+                        n.setId("Unario"); n.setTipoNodo("ceroVarios");
+                        Nodos_afn.Add(n);
+
+                    } else if (dar=="+") {
+                        Class_nodos n = new Class_nodos();
+                        n.setDato(dar);
+                        n.setId("Unario"); n.setTipoNodo("unoVarios");
+                        Nodos_afn.Add(n);
+
+                    }
+                          else if (dar == "?")
+                          {
+                        Class_nodos n = new Class_nodos();
+                        n.setDato(dar);
+                        n.setId("Unario"); n.setTipoNodo("ceroUno");
+                        Nodos_afn.Add(n);
+
+                    }
+                          else if (dar == ".")
+                          {
+                        Class_nodos n = new Class_nodos();
+                        n.setDato(dar);
+                        n.setId("Binario"); n.setTipoNodo("concatenar");
+                        Nodos_afn.Add(n);
+
+                    }
+                    else if (dar == "|")
+                    {
+                        Class_nodos n = new Class_nodos();
+                        n.setDato(dar);
+                        n.setId("Binario"); n.setTipoNodo("alter");
+                        Nodos_afn.Add(n);
+
+                    }
+                    else{
+                        Class_nodos n = new Class_nodos();
+                        n.setDato(dar);
+                        n.setId("op"); n.setTipoNodo("op");
+                        Nodos_afn.Add(n);
+
+                    }
+                }
+
             }
 
 
 
-            foreach (string dar in help) {
-                richTextBox3.Text = richTextBox3.Text + dar + "\n";
+            foreach (Class_nodos pa in Nodos_afn) { //testeo la lista generada de la expresion regular
+
+                richTextBox3.Text = richTextBox3.Text + pa.getDato() + "   ID: " + pa.getId() + "   TIPO Nodo: " + pa.getTipoNodo() +  '\n';
+
+
+
+
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

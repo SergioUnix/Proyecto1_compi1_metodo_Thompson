@@ -118,10 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>{
-
-
-//Definicion de mis conjuntos 
+    <value>//Definicion de mis conjuntos 
 CONJ: digito -&gt; 1~9;
 CONJ: letra -&gt; a~z;
 
@@ -130,29 +127,25 @@ CONJ: letra -&gt; a~z;
 !&gt;
 
 //Expresiones Regulares
-er1 -&gt; . letra *|letra |  digito "_";
+er1 -&gt; . {letra} *|{letra} |  {digito} "_";
 er2 -&gt; . . . *| ."c""d" . "a" "b" "b" "c" +"d"
 
-
-%%
-%%
 
 &lt;!
 	Definicion de lexemas
 !&gt;
 
-abecedario_cadena1_cadena2
-z
-1uno //error
-aaaa //error
-bcdddd;
-bcd
-ababcdabcdbc; //error falta d al final
+er1 : "abecedario_cadena1_cadena2";
+er1 : "z";
+er1 : "1uno"; //error
+er2 : "aaaa"; //error
+er2 : "bcdddd";
+er2 : "bcd";
+er2 : "ababcdabcdbc"; //error falta d al final
 
 &lt;!
 	Fin del archivo
 !&gt;
-}
 </value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

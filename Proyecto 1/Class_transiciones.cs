@@ -14,7 +14,11 @@ namespace Proyecto_1
             this.nombre = "";
             this.direccion = "";    
         }
-
+        public Class_transiciones(string no,string dir)
+        {
+            this.nombre = no;
+            this.direccion = dir;
+        }
 
         public void setNombre(string a)
         {
