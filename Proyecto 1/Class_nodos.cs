@@ -42,12 +42,31 @@ namespace Proyecto_1
             this.columna = 0;
             this.fila = 0;
             this.tipoNodo = "";
- 
+            this.next1 = null;
+            this.next2 = null;
 
 
         }
 
 
+
+        public void setAFN(AFN b)
+        {
+            this.automata = b;
+        }
+        public AFN getAFN()
+        {
+            return this.automata;
+        }
+
+        public void setListTransiciones(List<Class_transiciones> b)
+        {
+            this.transiciones = b;
+        }
+        public List<Class_transiciones> getListTransiciones()
+        {
+            return this.transiciones;
+        }
 
         public void aumentarcount()
         {

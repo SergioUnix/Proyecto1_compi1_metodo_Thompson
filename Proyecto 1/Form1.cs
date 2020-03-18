@@ -28,8 +28,7 @@ namespace Proyecto_1
         List<Class_nodos> Lexemas = new List<Class_nodos>();
         List<Class_nodos> Comentarios = new List<Class_nodos>();
 
-        List<Class_nodos> Nodos_afn = new List<Class_nodos>();
-
+      
 
 
 
@@ -259,29 +258,40 @@ namespace Proyecto_1
 
 
 
-        richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
+     //   richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
-            foreach (Class_nodos pa in Tokens)
-            {
-                richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-            }
+   //            foreach (Class_nodos pa in Tokens)
+     //       {
+     //           richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+     //       }
 
-           richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
+     //      richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
 
-            foreach (Class_nodos pa in Conjuntos)
-            {
-          richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-            }
+    //        foreach (Class_nodos pa in Conjuntos)
+      //      {
+    //      richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+    //        }
+
+
+
+
+            //lista de lista de expresiones nodos para formar afn
+            List<List<Class_nodos>> AFNS = new List<List<Class_nodos>>();
+
+            //lista de nodos de afn           
+            List<Class_nodos> Nodos_afn = new List<Class_nodos>();
+
+
 
 
 
             //////////////Lista de expresion regular
             List<string>  expresionLista= new List<string>();  /// tengo la expresion solo como una lista de string, separadas de comillas y llaves
-            richTextBox3.Text = richTextBox3.Text + "------------- Expresiones \n";
+            richTextBox2.Text = richTextBox2.Text + "------------- Expresiones \n";
 
             foreach (Class_nodos pa in Expresiones)
             {
-                 richTextBox3.Text = richTextBox3.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+                 richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
 
 
 
@@ -339,18 +349,246 @@ namespace Proyecto_1
                     }
                 }
 
+
+                ///meto la lista en la lista de listas del AFN
+
+                AFNS.Add(Nodos_afn);
+
+                Nodos_afn = new List<Class_nodos>();
+
+
+
+
+
+
             }
 
 
 
-            foreach (Class_nodos pa in Nodos_afn) { //testeo la lista generada de la expresion regular
+            
+            List<List<Class_nodos>> AF = new List<List<Class_nodos>>();// aca ingreso los nuevos nodos convertidos
+            List<Class_nodos> sustituto = new List<Class_nodos>();
 
-                richTextBox3.Text = richTextBox3.Text + pa.getDato() + "   ID: " + pa.getId() + "   TIPO Nodo: " + pa.getTipoNodo() +  '\n';
+            //Stack<string> numbers = new Stack<string>();
+            Stack<Class_nodos> cons = new Stack<Class_nodos>();
+
+
+            foreach (List<Class_nodos> lista in AFNS)
+            { //testeo la lista generada de la expresion regular
+
+                
+
+
+
+                for (int i =lista.Count()-1 ; i>=0; i--)
+                {
+
+                  
+                richTextBox2.Text = richTextBox2.Text + lista[i].getDato() + "     Tipo-nodo: " + lista[i].getTipoNodo() + "     Id: " + lista[i].getId() + '\n';
+
+                    if (lista[i].getDato() == "|") ///Cuando detecto un operador alter
+                    {
+                        Class_nodos aux1 = new Class_nodos();
+                        aux1 = cons.Pop();
+                        Class_nodos aux2 = new Class_nodos();
+                        aux2 = cons.Pop();
+                        if (aux1.getTipoNodo() == "op" && aux2.getTipoNodo() == "op")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.alter_CC(aux1.getDato(), aux2.getDato());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux1.getTipoNodo() == "afn" && aux2.getTipoNodo() == "op")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.alter_afCadena(aux1.getAFN(), aux2.getDato());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux1.getTipoNodo() == "op" && aux2.getTipoNodo() == "afn")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.alter_afCadena(aux1.getDato(), aux2.getAFN());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux1.getTipoNodo() == "afn" && aux2.getTipoNodo() == "afn")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.alter_afaf(aux1.getAFN(), aux2.getAFN());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+
+
+
+                    }
+                    else if (lista[i].getDato() == ".") ///Cuando detecto un operador concatenar
+                    {
+                        Class_nodos aux1 = new Class_nodos();
+                        aux1 = cons.Pop();
+                        Class_nodos aux2 = new Class_nodos();
+                        aux2 = cons.Pop();
+                        if (aux1.getTipoNodo() == "op" && aux2.getTipoNodo() == "op")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.concatenar_CC(aux1.getDato(), aux2.getDato());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux1.getTipoNodo() == "afn" && aux2.getTipoNodo() == "op")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.concatenar_afCadena(aux1.getAFN(), aux2.getDato());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux1.getTipoNodo() == "op" && aux2.getTipoNodo() == "afn")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.concatenar_afCadena(aux1.getDato(), aux2.getAFN());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux1.getTipoNodo() == "afn" && aux2.getTipoNodo() == "afn")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.concatenar_afaf(aux1.getAFN(), aux2.getAFN());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
 
 
 
 
+                    } //cierro llave de concatenar
+
+                    else if (lista[i].getDato() == "*") ///Cuando detecto un operador alter
+                    {
+                        Class_nodos aux = new Class_nodos();
+                        aux = cons.Pop();
+                        if (aux.getTipoNodo() == "op")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.kleene_Cadena(aux.getDato());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux.getTipoNodo() == "afn")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.kleene_af(aux.getAFN());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+
+
+
+
+
+                    }
+                    else if (lista[i].getDato() == "+") ///Cuando detecto un operador unoVarios
+                    {
+                        Class_nodos aux = new Class_nodos();
+                        aux = cons.Pop();
+
+                        if (aux.getTipoNodo() == "op")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.positiva_Cadena(aux.getDato());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux.getTipoNodo() == "afn")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.positiva_af(aux.getAFN());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+
+
+
+                    }
+                    else if (lista[i].getDato() == "?") ///Cuando detecto un operador unoVarios
+                    {
+                        Class_nodos aux = new Class_nodos();
+                        aux = cons.Pop();
+
+                        if (aux.getTipoNodo() == "op")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.ceroUno_C(aux.getDato());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+                        else if (aux.getTipoNodo() == "afn")
+                        {
+                            Class_nodos n = new Class_nodos(); n.setDato("afn"); n.setId("afn"); n.setTipoNodo("afn");
+                            AFN sus = new AFN(); sus.ceroUno_af(aux.getAFN());
+                            n.setAFN(sus);
+                            cons.Push(n);
+
+                        }
+
+
+                    } //cierro unoVarios 
+
+
+
+                    //cierro if de alter
+                    else { cons.Push(lista[i]); }
+
+                 
+
+
+                }
+
+                if(cons.LongCount()!=0)
+                sustituto.Add(cons.Peek());
+                AF.Add(sustituto);
+                sustituto = new List<Class_nodos>();
+
+            
             }
+
+
+
+
+
+
+
+
+
+            foreach (List<Class_nodos> lista in AF)
+            { //testeo la lista generada de la expresion regular
+                richTextBox3.Text = richTextBox3.Text +" lista numero: "+lista.Count()+ " -----------------------------------------------\n";
+                List<Class_nodos> comodin = lista;
+                for (int i = 0; i < comodin.Count(); i++)
+                {
+
+                    if (comodin[i].getDato() != " ")
+                        richTextBox3.Text = richTextBox3.Text + comodin[i].getDato() + "     Tipo-nodo: " + comodin[i].getTipoNodo() + "     Id: " + comodin[i].getId() + '\n';
+                    richTextBox3.Text = richTextBox3.Text + comodin[i].getAFN().generarTxt();
+
+
+
+                }
+                 }
 
 
 
