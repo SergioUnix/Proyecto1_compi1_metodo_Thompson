@@ -182,7 +182,7 @@ namespace Proyecto_1
             for (int i = 0; i < opera.Length; i++) {
 
                 if (cadena[i] == '.' || cadena[i] == '|' || cadena[i] == '?' || cadena[i] == '*' || cadena[i] == '+') {
-                    if (concatenar.Length > 1) { result.Add(concatenar); concatenar = ""; }
+                   if (concatenar.Length > 1) { result.Add(concatenar); concatenar = ""; }
                     concatenar = ""+cadena[i];
                     result.Add(concatenar);
                     concatenar = "";
@@ -204,7 +204,7 @@ namespace Proyecto_1
                 }
                 if (cadena[i] == '{')
                 {
-                    if (concatenar.Length > 1) { result.Add(concatenar); concatenar = ""; }
+                 if (concatenar.Length > 1) { result.Add(concatenar); concatenar = ""; }
                     i++;
                     for (int j = 0; j < opera.Length; j++)
                     {
@@ -224,20 +224,105 @@ namespace Proyecto_1
                 {
                     concatenar = "";
                 }
-
-
-
-
             }
-
-
-
-
-
-
 
             return result; 
         }
+
+
+
+
+
+
+
+
+        public List<Class_nodos> NodosExpresiones()
+        {
+            List<Class_nodos> result = new List<Class_nodos>();    //genero esta lista para separar los id de las expresiones
+            string opera = getDato();                   ///agarro el string de expresiones
+            char[] cadena = opera.ToCharArray();
+            string concatenar = "";
+
+            for (int i = 0; i < opera.Length; i++)
+            {
+
+                if (cadena[i] == '.' || cadena[i] == '|' || cadena[i] == '?' || cadena[i] == '*' || cadena[i] == '+')
+                {
+                    if (concatenar.Length > 1) { Class_nodos b = new Class_nodos(); b.setDato(concatenar); result.Add(b); concatenar = ""; }
+                    concatenar = "" + cadena[i];
+                    Class_nodos a = new Class_nodos(); a.setDato(concatenar);
+                    if (cadena[i] == '|')
+                    {
+                        a.setId("Binario"); a.setTipoNodo("alter");
+                    }
+                    else if (cadena[i] == '.') {
+                        a.setId("Binario"); a.setTipoNodo("concatenar");
+                    }
+                    else if (cadena[i] == '?')
+                    {
+                        a.setId("Unario"); a.setTipoNodo("ceroUno");
+                    }
+                    else if (cadena[i] == '*')
+                    {
+                        a.setId("Unario"); a.setTipoNodo("ceroVarios");
+                    }
+                    else if (cadena[i] == '+')
+                    {
+                        a.setId("Unario"); a.setTipoNodo("unoVarios");
+                    }
+
+                    result.Add(a);
+                    concatenar = "";
+
+
+                }
+                if (cadena[i] == '"')
+                {
+                    if (concatenar.Length > 1) { Class_nodos b = new Class_nodos(); b.setDato(concatenar); result.Add(b); concatenar = ""; }
+                    i++;
+                    for (int j = 0; j < opera.Length; j++)
+                    {
+                        if (cadena[i] == '"') { break; }
+                        concatenar = concatenar + cadena[i];
+                        i++;
+                    }
+                    Class_nodos a = new Class_nodos(); a.setDato(concatenar); a.setId("op"); a.setTipoNodo("op"); concatenar = "";
+                    result.Add(a);
+
+
+
+                }
+                if (cadena[i] == '{')
+                {
+                    if (concatenar.Length > 1) { Class_nodos b = new Class_nodos(); b.setDato(concatenar); result.Add(b); concatenar = ""; }
+                    i++;
+                    for (int j = 0; j < opera.Length; j++)
+                    {
+                        if (cadena[i] == '}') { break; }
+                        concatenar = concatenar + cadena[i];
+                        i++;
+                    }
+                    Class_nodos a = new Class_nodos(); a.setDato(concatenar); a.setId("op"); a.setTipoNodo("op"); concatenar = "";
+                    result.Add(a);
+
+
+                }
+
+                if (cadena[i] != '.' || cadena[i] != '|' || cadena[i] != '?' || cadena[i] != '*' || cadena[i] != '+')
+                {
+                    concatenar = concatenar + cadena[i];
+                }
+                if (cadena[i] == '.' || cadena[i] == '|' || cadena[i] == '?' || cadena[i] == '*' || cadena[i] == '+' || cadena[i] == '}' || cadena[i] == '"')
+                {
+                    concatenar = "";
+                }
+            }
+
+            return result;
+        }
+
+
+
 
 
 

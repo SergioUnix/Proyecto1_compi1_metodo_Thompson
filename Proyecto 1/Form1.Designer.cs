@@ -45,6 +45,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -52,7 +53,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(700, 469);
+            this.button1.Location = new System.Drawing.Point(1274, 881);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(161, 38);
             this.button1.TabIndex = 0;
@@ -64,7 +65,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(25, 70);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(525, 383);
+            this.richTextBox1.Size = new System.Drawing.Size(913, 383);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -77,10 +78,11 @@
             this.guardarToolStripMenuItem,
             this.generarToolStripMenuItem,
             this.guardarComoToolStripMenuItem,
-            this.generarGraphvizToolStripMenuItem});
+            this.generarGraphvizToolStripMenuItem,
+            this.limpiarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1065, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1530, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -119,25 +121,25 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(614, 70);
+            this.pictureBox1.Location = new System.Drawing.Point(1001, 50);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(337, 148);
+            this.pictureBox1.Size = new System.Drawing.Size(420, 224);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(614, 304);
+            this.pictureBox2.Location = new System.Drawing.Point(1004, 309);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(337, 149);
+            this.pictureBox2.Size = new System.Drawing.Size(417, 206);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(611, 37);
+            this.label1.Location = new System.Drawing.Point(1007, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 5;
@@ -147,7 +149,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(621, 284);
+            this.label2.Location = new System.Drawing.Point(1001, 277);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 17);
             this.label2.TabIndex = 6;
@@ -157,7 +159,7 @@
             // 
             this.richTextBox2.Location = new System.Drawing.Point(16, 521);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(463, 344);
+            this.richTextBox2.Size = new System.Drawing.Size(721, 344);
             this.richTextBox2.TabIndex = 7;
             this.richTextBox2.Text = "";
             // 
@@ -173,7 +175,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(538, 480);
+            this.label4.Location = new System.Drawing.Point(914, 469);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 17);
             this.label4.TabIndex = 9;
@@ -181,17 +183,24 @@
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(485, 521);
+            this.richTextBox3.Location = new System.Drawing.Point(787, 521);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(551, 344);
+            this.richTextBox3.Size = new System.Drawing.Size(634, 344);
             this.richTextBox3.TabIndex = 10;
             this.richTextBox3.Text = "";
+            // 
+            // limpiarToolStripMenuItem
+            // 
+            this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
+            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.limpiarToolStripMenuItem.Text = "Limpiar";
+            this.limpiarToolStripMenuItem.Click += new System.EventHandler(this.limpiarToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 894);
+            this.ClientSize = new System.Drawing.Size(1530, 950);
             this.ControlBox = false;
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.label4);
@@ -238,6 +247,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.ToolStripMenuItem limpiarToolStripMenuItem;
     }
 }
 

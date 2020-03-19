@@ -285,76 +285,15 @@ namespace Proyecto_1
 
 
 
-            //////////////Lista de expresion regular
-            List<string>  expresionLista= new List<string>();  /// tengo la expresion solo como una lista de string, separadas de comillas y llaves
             richTextBox2.Text = richTextBox2.Text + "------------- Expresiones \n";
 
             foreach (Class_nodos pa in Expresiones)
             {
                  richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
 
+                 AFNS.Add(pa.NodosExpresiones());
+               // richTextBox2.Text = richTextBox2.Text + pa.NodosExpresiones()[0].getDato();
 
-
-                expresionLista= pa.arregloExpresiones(); //por cada iteración obtengo una lista de string de las ER
-
-                foreach (string dar in expresionLista)   //convierto a nodos la lista de string y les coloco atributos como tipo de nodo y si son unarios o binarios
-                {
-
-
-                          if (dar == "*" )
-                          {
-
-                        Class_nodos n = new Class_nodos();
-                        n.setDato(dar);
-                        n.setId("Unario"); n.setTipoNodo("ceroVarios");
-                        Nodos_afn.Add(n);
-
-                    } else if (dar=="+") {
-                        Class_nodos n = new Class_nodos();
-                        n.setDato(dar);
-                        n.setId("Unario"); n.setTipoNodo("unoVarios");
-                        Nodos_afn.Add(n);
-
-                    }
-                          else if (dar == "?")
-                          {
-                        Class_nodos n = new Class_nodos();
-                        n.setDato(dar);
-                        n.setId("Unario"); n.setTipoNodo("ceroUno");
-                        Nodos_afn.Add(n);
-
-                    }
-                          else if (dar == ".")
-                          {
-                        Class_nodos n = new Class_nodos();
-                        n.setDato(dar);
-                        n.setId("Binario"); n.setTipoNodo("concatenar");
-                        Nodos_afn.Add(n);
-
-                    }
-                    else if (dar == "|")
-                    {
-                        Class_nodos n = new Class_nodos();
-                        n.setDato(dar);
-                        n.setId("Binario"); n.setTipoNodo("alter");
-                        Nodos_afn.Add(n);
-
-                    }
-                    else{
-                        Class_nodos n = new Class_nodos();
-                        n.setDato(dar);
-                        n.setId("op"); n.setTipoNodo("op");
-                        Nodos_afn.Add(n);
-
-                    }
-                }
-
-
-                ///meto la lista en la lista de listas del AFN
-
-                AFNS.Add(Nodos_afn);
-
-                Nodos_afn = new List<Class_nodos>();
 
 
 
@@ -386,7 +325,7 @@ namespace Proyecto_1
                   
                 richTextBox2.Text = richTextBox2.Text + lista[i].getDato() + "     Tipo-nodo: " + lista[i].getTipoNodo() + "     Id: " + lista[i].getId() + '\n';
 
-                    if (lista[i].getDato() == "|") ///Cuando detecto un operador alter
+                    if (lista[i].getDato() == "|" && lista[i].getTipoNodo()=="alter") ///Cuando detecto un operador alter
                     {
                         Class_nodos aux1 = new Class_nodos();
                         aux1 = cons.Pop();
@@ -428,7 +367,7 @@ namespace Proyecto_1
 
 
                     }
-                    else if (lista[i].getDato() == ".") ///Cuando detecto un operador concatenar
+                    else if (lista[i].getDato() == "." && lista[i].getTipoNodo()=="concatenar") ///Cuando detecto un operador concatenar
                     {
                         Class_nodos aux1 = new Class_nodos();
                         aux1 = cons.Pop();
@@ -472,7 +411,7 @@ namespace Proyecto_1
 
                     } //cierro llave de concatenar
 
-                    else if (lista[i].getDato() == "*") ///Cuando detecto un operador alter
+                    else if (lista[i].getDato() == "*" && lista[i].getTipoNodo() == "ceroVarios") ///Cuando detecto un operador alter
                     {
                         Class_nodos aux = new Class_nodos();
                         aux = cons.Pop();
@@ -498,7 +437,7 @@ namespace Proyecto_1
 
 
                     }
-                    else if (lista[i].getDato() == "+") ///Cuando detecto un operador unoVarios
+                    else if (lista[i].getDato() == "+" && lista[i].getTipoNodo() == "unoVarios") ///Cuando detecto un operador unoVarios
                     {
                         Class_nodos aux = new Class_nodos();
                         aux = cons.Pop();
@@ -523,7 +462,7 @@ namespace Proyecto_1
 
 
                     }
-                    else if (lista[i].getDato() == "?") ///Cuando detecto un operador unoVarios
+                    else if (lista[i].getDato() == "?" && lista[i].getTipoNodo() == "ceroUno") ///Cuando detecto un operador unoVarios
                     {
                         Class_nodos aux = new Class_nodos();
                         aux = cons.Pop();
@@ -745,6 +684,12 @@ namespace Proyecto_1
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void limpiarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "";
+            richTextBox3.Text = "";
         }
     }
 }

@@ -174,56 +174,100 @@ namespace Proyecto_1
 
 
 
-        /// cerradura positiva
-        public void positiva_af(AFN a)
+        ////////////////////////////// cerradura positiva
+
+        //funciona bien solo que en el proyecto nos piden transformar la positiva como un  .a*a que es lo mismo 
+          public void positiva_af(AFN a)
         {
-            Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("unoVarios");// le da numeracion al nodo            
-            Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("unoVarios"); // le da numeracion al nodo
-            i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
-            i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
-            a.getFinal().addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString())); // hago una trans del a.final al a.inicio
-            this.inicio = i; this.final = f;
+         Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("unoVarios");// le da numeracion al nodo            
+        Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("unoVarios"); // le da numeracion al nodo
+         i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
+         i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
+         a.getFinal().addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString())); // hago una trans del a.final al a.inicio
+         this.inicio = i; this.final = f;
+         }
+
+        // public void positiva_Cadena(string aa)
+        //{
+
+        //  AFN a = new Proyecto_1.AFN();
+        // a.primerAfn(aa);
+
+        // Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("unoVarios");// le da numeracion al nodo            
+        // Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("unoVarios"); // le da numeracion al nodo
+        // i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
+        // i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
+        //  a.getFinal().addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString())); // hago una trans del a.final al a.inicio
+        // this.inicio = i; this.final = f;
+        // }
+
+
+
+
+        public void positiva_Cadena(string a)
+        {
+            AFN klee = new Proyecto_1.AFN();
+            klee.kleene_Cadena(a);                 //aca hago un afn con aux* que es la cerradura de kleen
+            concatenar_afCadena(a,klee);
         }
 
-        public void positiva_Cadena(string aa)
-        {
-
-            AFN a = new Proyecto_1.AFN();
-            a.primerAfn(aa);
-
-            Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("unoVarios");// le da numeracion al nodo            
-            Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("unoVarios"); // le da numeracion al nodo
-            i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
-            i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
-            a.getFinal().addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString())); // hago una trans del a.final al a.inicio
-            this.inicio = i; this.final = f;
-        }
 
 
-        //cerradura  ?
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////cerradura  ?
+
+        //funciona pero en el proyecto nos piden que convirtamos el ?  de la siguiente manera |a£ una alter con el afn y £
+        //public void ceroUno_af(AFN a)
+        //{
+        //  Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("ceroUno");// le da numeracion al nodo            
+        // Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("ceroUno"); // le da numeracion al nodo
+        // i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
+        // i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
+        // i.addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString())); // hago una trans del inicial al final
+        //this.inicio = i; this.final = f;
+        //}
+
+        //public void ceroUno_C(string aa)
+        //{
+        //  AFN a = new Proyecto_1.AFN();
+        //a.primerAfn(aa);
+        // Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("ceroUno");// le da numeracion al nodo            
+        // Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("ceroUno"); // le da numeracion al nodo
+        // i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
+        // i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
+        // i.addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString())); // hago una trans del inicial al final
+        // this.inicio = i; this.final = f;
+        // }
+
         public void ceroUno_af(AFN a)
         {
             Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("ceroUno");// le da numeracion al nodo            
-            Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("ceroUno"); // le da numeracion al nodo
-            i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
+            Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("ceroUno");// le da numeracion al nodo
+            i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i
+            i.addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de i hacia el final porque es ?
             i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
-            i.addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString())); // hago una trans del inicial al final
             this.inicio = i; this.final = f;
-        }
+         }
 
         public void ceroUno_C(string aa)
         {
             AFN a = new Proyecto_1.AFN();
             a.primerAfn(aa);
+
             Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("ceroUno");// le da numeracion al nodo            
-            Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("ceroUno"); // le da numeracion al nodo
-            i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
+            Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("ceroUno");// le da numeracion al nodo
+            i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i
+            i.addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de i hacia el final porque es ?
             i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
-            i.addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString())); // hago una trans del inicial al final
             this.inicio = i; this.final = f;
         }
-
-
 
 
 
