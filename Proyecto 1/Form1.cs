@@ -90,10 +90,27 @@ namespace Proyecto_1
             char[] cadena = richTextBox1.Text.ToCharArray();
             string concat = "";
             int iterador = 0;
+
+
+            ////////////////////////////////////////////// Esto es para setear las variables al analizar otro archivo
             j = 0;
             pictureBox1.Image = null;
             nombre_archivos = new List<string>();
 
+            contador_estado = 0;
+            Tokens = new List<Class_nodos>();
+            concatenar = "";
+            concatenar2 = "";
+            comodin = "";
+
+            columna = 1;
+            fila = 1;
+
+            Conjuntos = new List<Class_nodos>();
+            Expresiones = new List<Class_nodos>();
+             Lexemas = new List<Class_nodos>();
+             Comentarios = new List<Class_nodos>();
+            ////////////////////////////////////////////// termina seteo
 
             while (iterador < cadena.Length)
             {
@@ -690,6 +707,24 @@ namespace Proyecto_1
             j = 0;
             pictureBox1.Image = null;
             nombre_archivos = new List<string>();
+
+
+            contador_estado = 0;
+            Tokens = new List<Class_nodos>();
+            concatenar = "";
+            concatenar2 = "";
+            comodin = "";
+
+            columna = 1;
+            fila = 1;
+
+
+            Conjuntos = new List<Class_nodos>();
+            Expresiones = new List<Class_nodos>();
+            Lexemas = new List<Class_nodos>();
+            Comentarios = new List<Class_nodos>();
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)

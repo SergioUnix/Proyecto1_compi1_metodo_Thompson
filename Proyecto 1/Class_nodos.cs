@@ -50,6 +50,7 @@ namespace Proyecto_1
 
 
 
+
         public void setAFN(AFN b)
         {
             this.automata = b;

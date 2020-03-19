@@ -350,10 +350,11 @@ namespace Proyecto_1
 
                 if (aux.getNext2() != null)
                 {
+                    auxnext2 = aux.getNext2();
                    Class_alfabeto n2 = new Class_alfabeto();
                     n2.setnumeroNodo(auxnext2.getContadorNodo().ToString());
 
-                    auxnext2 = aux.getNext2();
+                    
                     while (auxnext2 != null)
                     {
                         
