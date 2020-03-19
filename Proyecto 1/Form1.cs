@@ -14,6 +14,9 @@ namespace Proyecto_1
     public partial class Form1 : Form
     {
 
+
+
+
         int contador_estado = 0;
         List<Class_nodos> Tokens = new List<Class_nodos>();
         string concatenar = "";
@@ -28,8 +31,12 @@ namespace Proyecto_1
         List<Class_nodos> Lexemas = new List<Class_nodos>();
         List<Class_nodos> Comentarios = new List<Class_nodos>();
 
-      
 
+
+
+        //esto es para los botones de las imagenes
+        List<string> nombre_archivos = new List<string>();
+        int j = 0;
 
 
 
@@ -42,13 +49,50 @@ namespace Proyecto_1
 
 
 
+        private static void GenerateGraph(string fileName, string path)
+        {
+
+            // se manda a llamar asi GenerateGraph("Grafica.txt", "C:\\Users\\ADMIN\\Desktop");
+            try
+            {
+                var command = string.Format("dot -Tjpg {0} -o {1}", Path.Combine(path, fileName), Path.Combine(path, fileName.Replace(".txt", ".jpg")));
+                var procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", "/C " + command);
+                var proc = new System.Diagnostics.Process();
+                //probar si este no desplega la ventana de cmd
+                proc.StartInfo.UseShellExecute = false;
+
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                proc.WaitForExit();
+            }
+            catch
+            {
+                MessageBox.Show("error");
+            }
+        }
+
+        private static void archivoTxt(string nombre, string cadena_ghrapviz)
+        {
+
+            using (StreamWriter outputFile = new StreamWriter( nombre + ".txt")) {
+
+                outputFile.WriteLine(cadena_ghrapviz);
+
+            };
+
+
+        }
+
+
 
         private void Analizador()
         {
             char[] cadena = richTextBox1.Text.ToCharArray();
             string concat = "";
             int iterador = 0;
-
+            j = 0;
+            pictureBox1.Image = null;
+            nombre_archivos = new List<string>();
 
 
             while (iterador < cadena.Length)
@@ -110,7 +154,7 @@ namespace Proyecto_1
                     {
                         if (cadena[iterador] == '\n') { columna = 1; fila++; }         //////////////
                         concatenar = concatenar + cadena[iterador];
-                        if (cadena[iterador] == '>')
+                        if (cadena[iterador] == '>' && cadena[iterador-1] == '!')
                         { break; } iterador++;
                     }
                     //ahora que concateno todo los comentarios los ingreso a la lista de comentarios
@@ -251,39 +295,37 @@ namespace Proyecto_1
                 columna++;
 
             } // Aca se cierra el while
-      
 
 
 
 
+                // richTextBox2.Text = richTextBox2.Text + "------------- Comentarios \n";
+
+                //        foreach (Class_nodos pa in Comentarios)
+                //   {
+                //       richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() + '\n';
+                // }
 
 
-     //   richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
+            //   richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
-   //            foreach (Class_nodos pa in Tokens)
-     //       {
-     //           richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-     //       }
+            //            foreach (Class_nodos pa in Tokens)
+            //       {
+            //           richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+            //       }
 
-     //      richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
+            //      richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
 
-    //        foreach (Class_nodos pa in Conjuntos)
-      //      {
-    //      richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-    //        }
-
-
+            //        foreach (Class_nodos pa in Conjuntos)
+            //      {
+            //      richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+            //        }
 
 
-            //lista de lista de expresiones nodos para formar afn
+
+
+            // lista de  nodos para formar afn, aca esta toda la expresion regular dada por Nodos clasificados segun su tipo
             List<List<Class_nodos>> AFNS = new List<List<Class_nodos>>();
-
-            //lista de nodos de afn           
-            List<Class_nodos> Nodos_afn = new List<Class_nodos>();
-
-
-
-
 
             richTextBox2.Text = richTextBox2.Text + "------------- Expresiones \n";
 
@@ -291,39 +333,21 @@ namespace Proyecto_1
             {
                  richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
 
-                 AFNS.Add(pa.NodosExpresiones());
-               // richTextBox2.Text = richTextBox2.Text + pa.NodosExpresiones()[0].getDato();
-
-
-
-
-
-
-
+                 AFNS.Add(pa.NodosExpresiones()); // metodo me devuelve una list<Class_nodos>, donde ya viene la expresion regular por nodos y clasificada
             }
 
 
 
             
-            List<List<Class_nodos>> AF = new List<List<Class_nodos>>();// aca ingreso los nuevos nodos convertidos
-            List<Class_nodos> sustituto = new List<Class_nodos>();
-
-            //Stack<string> numbers = new Stack<string>();
-            Stack<Class_nodos> cons = new Stack<Class_nodos>();
-
-
-            foreach (List<Class_nodos> lista in AFNS)
-            { //testeo la lista generada de la expresion regular
-
-                
-
-
-
+            List<List<Class_nodos>> AF = new List<List<Class_nodos>>();// aca ingreso los nuevos nodos convertidos y queda el ultimo AFND final
+            List<Class_nodos> sustituto = new List<Class_nodos>();            
+            Stack<Class_nodos> cons = new Stack<Class_nodos>();//Pila donde voy ingresando los datos y AFN cuando voy generando el AFN total
+            
+            foreach (List<Class_nodos> lista in AFNS)  //En este for each recorro la lista de nodos de derecha a izquierda y voy ingresando en la pila cons
+            { 
                 for (int i =lista.Count()-1 ; i>=0; i--)
-                {
-
-                  
-                richTextBox2.Text = richTextBox2.Text + lista[i].getDato() + "     Tipo-nodo: " + lista[i].getTipoNodo() + "     Id: " + lista[i].getId() + '\n';
+                {                  
+                //richTextBox2.Text = richTextBox2.Text + lista[i].getDato() + "     Tipo-nodo: " + lista[i].getTipoNodo() + "     Id: " + lista[i].getId() + '\n';
 
                     if (lista[i].getDato() == "|" && lista[i].getTipoNodo()=="alter") ///Cuando detecto un operador alter
                     {
@@ -411,7 +435,7 @@ namespace Proyecto_1
 
                     } //cierro llave de concatenar
 
-                    else if (lista[i].getDato() == "*" && lista[i].getTipoNodo() == "ceroVarios") ///Cuando detecto un operador alter
+                    else if (lista[i].getDato() == "*" && lista[i].getTipoNodo() == "ceroVarios") ///Cuando detecto un operador ceroVarios
                     {
                         Class_nodos aux = new Class_nodos();
                         aux = cons.Pop();
@@ -462,7 +486,7 @@ namespace Proyecto_1
 
 
                     }
-                    else if (lista[i].getDato() == "?" && lista[i].getTipoNodo() == "ceroUno") ///Cuando detecto un operador unoVarios
+                    else if (lista[i].getDato() == "?" && lista[i].getTipoNodo() == "ceroUno") ///Cuando detecto un operador ceroUno
                     {
                         Class_nodos aux = new Class_nodos();
                         aux = cons.Pop();
@@ -486,11 +510,7 @@ namespace Proyecto_1
 
 
                     } //cierro unoVarios 
-
-
-
-                    //cierro if de alter
-                    else { cons.Push(lista[i]); }
+                    else { cons.Push(lista[i]); } // cuando no es ninguno de los operandos ingreso solamente a la pila
 
                  
 
@@ -498,9 +518,9 @@ namespace Proyecto_1
                 }
 
                 if(cons.LongCount()!=0)
-                sustituto.Add(cons.Peek());
-                AF.Add(sustituto);
-                sustituto = new List<Class_nodos>();
+                sustituto.Add(cons.Peek()); //ingreso en sustituto lo ultimo que quedo en la pila cons
+                AF.Add(sustituto); // luego ingreso la lista a  AF que es una lista de lista de nodos , don de en la primera posicion queda el AFN
+                sustituto = new List<Class_nodos>(); // seteo sustituto para seguir con la siguiente lista de nodos a trasformar
 
             
             }
@@ -510,8 +530,10 @@ namespace Proyecto_1
 
 
 
-
-
+            List<List<Class_alfabeto>> Tabla_epsido = new List<List<Class_alfabeto>>();
+           
+            int cont = 0;
+          
 
             foreach (List<Class_nodos> lista in AF)
             { //testeo la lista generada de la expresion regular
@@ -519,46 +541,38 @@ namespace Proyecto_1
                 List<Class_nodos> comodin = lista;
                 for (int i = 0; i < comodin.Count(); i++)
                 {
+                    cont++;
+                   // if (comodin[i].getDato() != " ") ///muestra los datos del ultimo afn que se quedo al recorrer alla arriba toda la ER
+                   // richTextBox3.Text = richTextBox3.Text + comodin[i].getDato() + "     Tipo-nodo: " + comodin[i].getTipoNodo() + "     Id: " + comodin[i].getId() + '\n';
+                    richTextBox3.Text = richTextBox3.Text + comodin[i].getAFN().generarTxt(); /// aca obtengo el String completo de Ghrapviz 
+                    archivoTxt(cont.ToString(), comodin[i].getAFN().generarTxt()); //con este metodo creo archivos.txt
+                    nombre_archivos.Add(cont.ToString()); //guardo los nombres de archivos creados
 
-                    if (comodin[i].getDato() != " ")
-                        richTextBox3.Text = richTextBox3.Text + comodin[i].getDato() + "     Tipo-nodo: " + comodin[i].getTipoNodo() + "     Id: " + comodin[i].getId() + '\n';
-                    richTextBox3.Text = richTextBox3.Text + comodin[i].getAFN().generarTxt();
+                    GenerateGraph(cont.ToString()+".txt", "");  //con esto genero los png de las expresiones
 
+
+                    Tabla_epsido.Add(comodin[i].getAFN().tablaEpsido());
 
 
                 }
                  }
 
+            foreach (List<Class_alfabeto> lista in Tabla_epsido)
+            {
+                richTextBox2.Text = richTextBox2.Text + " Nodos de Tompson ---------------------------- \n";
+                foreach (Class_alfabeto nodo in lista) { 
+                    richTextBox2.Text = richTextBox2.Text + "Numero de nodo " + nodo.getnumeroNodo()+"\n";
+                 
+                foreach(Class_transiciones p in nodo.getIntervalo()) {
+                        richTextBox2.Text = richTextBox2.Text + "----------- Trans " + p.getNombre()+ "   Dir   "+ p.getDireccion() + "\n";
+
+                    }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
+                }
+                 } }
+                
 
 
 
@@ -642,24 +656,7 @@ namespace Proyecto_1
 
 
 
-        private static void GenerateGraph(string fileName, string path)
-        {
 
-            // se manda a llamar asi GenerateGraph("Grafica.txt", "C:\\Users\\ADMIN\\Desktop");
-            try
-            {
-                var command = string.Format("dot -Tjpg {0} -o {1}", Path.Combine(path, fileName), Path.Combine(path, fileName.Replace(".txt", ".jpg")));
-                var procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", "/C " + command);
-                var proc = new System.Diagnostics.Process();
-                proc.StartInfo = procStartInfo;
-                proc.Start();
-                proc.WaitForExit();
-            }
-            catch 
-            {
-                MessageBox.Show("error");
-            }
-        }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -670,10 +667,10 @@ namespace Proyecto_1
         {
 
             //this.pictureBox1.Size = new System.Drawing.Size(140, 140); // le da el tamaño al label
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
-            this.pictureBox1.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
-            pictureBox1.Image = Image.FromFile("C:\\Users\\ADMIN\\Desktop\\automata.png");
+            //this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
+           // this.pictureBox1.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
+           // pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
+           // pictureBox1.Image = Image.FromFile("C:\\Users\\ADMIN\\Desktop\\automata.png");
         }
 
         private void generarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -690,6 +687,51 @@ namespace Proyecto_1
         {
             richTextBox2.Text = "";
             richTextBox3.Text = "";
+            j = 0;
+            pictureBox1.Image = null;
+            nombre_archivos = new List<string>();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            if (nombre_archivos.Count() > 0) { 
+                       j++;
+            if (j > nombre_archivos.Count()) {
+                j = 1;
+            }
+            //this.pictureBox1.Size = new System.Drawing.Size(140, 140); // le da el tamaño al label
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
+            this.pictureBox1.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
+            pictureBox1.Image = Image.FromFile(j+".jpg");
+            }
+
+
+
+
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (nombre_archivos.Count() > 0)
+            {
+                j--;
+            if (j < 1)
+            {
+                j = nombre_archivos.Count();
+            }
+            //this.pictureBox1.Size = new System.Drawing.Size(140, 140); // le da el tamaño al label
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
+            this.pictureBox1.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
+            pictureBox1.Image = Image.FromFile(j + ".jpg");
+            }
+
+
+
         }
     }
 }

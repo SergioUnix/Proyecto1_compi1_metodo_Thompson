@@ -46,6 +46,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -53,9 +55,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1274, 881);
+            this.button1.Location = new System.Drawing.Point(1743, 50);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 38);
+            this.button1.Size = new System.Drawing.Size(72, 35);
             this.button1.TabIndex = 0;
             this.button1.Text = "Salir";
             this.button1.UseVisualStyleBackColor = true;
@@ -82,7 +84,7 @@
             this.limpiarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1530, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1882, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -123,7 +125,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(1001, 50);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(420, 224);
+            this.pictureBox1.Size = new System.Drawing.Size(710, 224);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -132,7 +134,7 @@
             // 
             this.pictureBox2.Location = new System.Drawing.Point(1004, 309);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(417, 206);
+            this.pictureBox2.Size = new System.Drawing.Size(707, 206);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
@@ -196,12 +198,35 @@
             this.limpiarToolStripMenuItem.Text = "Limpiar";
             this.limpiarToolStripMenuItem.Click += new System.EventHandler(this.limpiarToolStripMenuItem_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1139, 24);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Siguiente";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1058, 24);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Anterior";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1530, 950);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1882, 1055);
             this.ControlBox = false;
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -218,6 +243,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Proyecto 1_ 201020252";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -248,6 +274,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.ToolStripMenuItem limpiarToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

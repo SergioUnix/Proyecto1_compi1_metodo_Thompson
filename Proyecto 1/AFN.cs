@@ -297,61 +297,86 @@ namespace Proyecto_1
             string lineafinal = "} \n";
             string nodos = "";
             string direcciones = "";
-
             Class_nodos aux = this.inicio;
             Class_nodos auxnext2 = new Class_nodos();
             while (aux!=null) {
-
                 nodos = nodos + "node" + aux.getContadorNodo() + "; \n";
                 for (int j = 0; j < aux.getListTransiciones().Count(); j++) {
-
-                    direcciones = direcciones + "node" + aux.getContadorNodo() + "-> node" + aux.getListTransiciones()[j].getDireccion() + "[label = \"" + aux.getListTransiciones()[j].getNombre() + "\"];  \n";
-
+                     direcciones = direcciones + "node" + aux.getContadorNodo() + "-> node" + aux.getListTransiciones()[j].getDireccion() + "[label = \"" + aux.getListTransiciones()[j].getNombre() + "\"];  \n";
                 }
                 if (aux.getNext2() != null) {
-
                              auxnext2 = aux.getNext2();
-
                     while (auxnext2 != null)
                     {
-
                         nodos = nodos + "node" + auxnext2.getContadorNodo() + ";  \n";
                         for (int j = 0; j < auxnext2.getListTransiciones().Count(); j++)
                         {
-
                             direcciones = direcciones + "node" + auxnext2.getContadorNodo() + "-> node" + auxnext2.getListTransiciones()[j].getDireccion() + "[label = \"" + auxnext2.getListTransiciones()[j].getNombre() + "\"]; \n";
 
                         }
                         auxnext2 = auxnext2.getNext1();
                               }
-
-
-
-
-
-
-
-
-
-
-
-
                     }
-               
-
-
-
                 aux = aux.getNext1();
             }
-
             string total = linea1 + nodos + direcciones + lineafinal;
-
             return total;
-
-
-
-
         }
+
+
+
+
+
+
+        public List<Class_alfabeto> tablaEpsido()
+        {
+            List<Class_alfabeto> lista = new List<Class_alfabeto>();
+
+            Class_nodos aux = this.inicio;
+            Class_nodos auxnext2 = new Class_nodos();
+            while (aux != null)
+            {
+                
+                Class_alfabeto n = new Class_alfabeto();
+                n.setnumeroNodo(aux.getContadorNodo().ToString());
+                for (int j = 0; j < aux.getListTransiciones().Count(); j++)
+                {                  
+                    n.setnumeroNodo(aux.getContadorNodo().ToString()); // agrego el numero del nodo en el cual recorro
+                    n.addIntervalo(aux.getListTransiciones()[j]); //añado la transicion en la cual estoy recorriendo
+                }
+                lista.Add(n);
+
+
+
+                if (aux.getNext2() != null)
+                {
+                   Class_alfabeto n2 = new Class_alfabeto();
+                    n2.setnumeroNodo(auxnext2.getContadorNodo().ToString());
+
+                    auxnext2 = aux.getNext2();
+                    while (auxnext2 != null)
+                    {
+                        
+                        for (int j = 0; j < auxnext2.getListTransiciones().Count(); j++)
+                        {
+                            
+                            n2.setnumeroNodo(auxnext2.getContadorNodo().ToString()); // agrego el numero del nodo en el cual recorro
+                            n2.addIntervalo(auxnext2.getListTransiciones()[j]); //añado la transicion en la cual estoy recorriendo
+                           
+                        }
+
+                        lista.Add(n2);
+                        n2 = new Class_alfabeto();
+                        auxnext2 = auxnext2.getNext1();
+                    }
+                }
+                n = new Class_alfabeto();
+                aux = aux.getNext1();
+            }
+            
+           return lista;
+        }
+
 
 
 

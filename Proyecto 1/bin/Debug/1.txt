@@ -1,0 +1,26 @@
+digraph G{ 
+ rankdir=LR; 
+node44; 
+node45; 
+node40; 
+node41; 
+node34;  
+node35;  
+node36; 
+node37; 
+node39; 
+node43; 
+node44-> node45[label = "letra"];  
+node45-> node40[label = "£"];  
+node45-> node43[label = "£"];  
+node40-> node41[label = "letra"];  
+node41-> node36[label = "£"];  
+node41-> node34[label = "£"];  
+node34-> node35[label = "_"]; 
+node35-> node39[label = "£"]; 
+node36-> node37[label = "digito"];  
+node37-> node39[label = "£"];  
+node39-> node43[label = "£"];  
+node39-> node40[label = "£"];  
+} 
+

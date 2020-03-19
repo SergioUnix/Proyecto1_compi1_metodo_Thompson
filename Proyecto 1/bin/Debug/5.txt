@@ -1,0 +1,17 @@
+digraph G{ 
+ rankdir=LR; 
+node108; 
+node109; 
+node107; 
+node102; 
+node103; 
+node105; 
+node108-> node109[label = "c"];  
+node109-> node107[label = "d"];  
+node107-> node102[label = "£"];  
+node107-> node105[label = "£"];  
+node102-> node103[label = "d"];  
+node103-> node105[label = "£"];  
+node103-> node102[label = "£"];  
+} 
+
