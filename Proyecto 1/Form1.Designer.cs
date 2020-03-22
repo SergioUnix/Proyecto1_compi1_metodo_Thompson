@@ -37,6 +37,7 @@
             this.generarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarGraphvizToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
@@ -121,6 +121,13 @@
             this.generarGraphvizToolStripMenuItem.Name = "generarGraphvizToolStripMenuItem";
             this.generarGraphvizToolStripMenuItem.Size = new System.Drawing.Size(12, 24);
             // 
+            // limpiarToolStripMenuItem
+            // 
+            this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
+            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.limpiarToolStripMenuItem.Text = "Limpiar";
+            this.limpiarToolStripMenuItem.Click += new System.EventHandler(this.limpiarToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(944, 50);
@@ -191,18 +198,11 @@
             this.richTextBox3.TabIndex = 10;
             this.richTextBox3.Text = "";
             // 
-            // limpiarToolStripMenuItem
-            // 
-            this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
-            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
-            this.limpiarToolStripMenuItem.Text = "Limpiar";
-            this.limpiarToolStripMenuItem.Click += new System.EventHandler(this.limpiarToolStripMenuItem_Click);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1139, 24);
+            this.button2.Location = new System.Drawing.Point(1139, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(86, 35);
             this.button2.TabIndex = 11;
             this.button2.Text = "Siguiente";
             this.button2.UseVisualStyleBackColor = true;
@@ -210,9 +210,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1058, 24);
+            this.button3.Location = new System.Drawing.Point(1058, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 35);
             this.button3.TabIndex = 12;
             this.button3.Text = "Anterior";
             this.button3.UseVisualStyleBackColor = true;

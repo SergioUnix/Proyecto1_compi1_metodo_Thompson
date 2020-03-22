@@ -39,6 +39,12 @@ namespace Proyecto_1
         int j = 0;
 
 
+        /// <summary>
+        /// Tabla epsido para analizar
+        /// </summary>
+        List<List<Class_alfabeto>> Tabla_epsido_aux = new List<List<Class_alfabeto>>();
+
+
 
         public Form1()
         {
@@ -46,13 +52,74 @@ namespace Proyecto_1
             this.CenterToScreen(); //centra nuestra pantalla no importando el tamaño
             
         }
+    
+
+        private  List<string> obtengo_estados_epsido(string nombre_nodo, string caracter)
+        {  List<string> n = new List<string>();
+            foreach (List<Class_alfabeto> lista in Tabla_epsido_aux)
+            {  //recorro las listas               
+                foreach (Class_alfabeto nodo in lista)
+                {    //recorro los nodos                  
+                    if (nodo.getnumeroNodo() == nombre_nodo) { 
+                    foreach (Class_transiciones p in nodo.getIntervalo())
+                    {  // recorro las transiciones
+
+
+                            //richTextBox3.Text = richTextBox3.Text +p.getNombre()+ p.getDireccion() + "\n";
+                            if (p.getNombre() == caracter)                            {
+                               // richTextBox3.Text = richTextBox3.Text +p.getDireccion()+ "\n";
+                                n.Add(p.getDireccion());//lleno la lista de transiciones solo con el caracter dado
+                            }                    }
+                    }///cierro el if
+                }
+
+
+
+
+            }
+            return n;
+        }
+        private List<string> sucesores_epsido(string nombre_nodo, string caracter)
+        {   List<string> visitados = new List<string>();
+            List<string> n = new List<string>();
+            Stack<string> cons = new Stack<string>();
+            n=obtengo_estados_epsido(nombre_nodo,caracter);
+            if (n.Count() > 0) { 
+            for(int i = 0; i < n.Count(); i++) {
+                cons.Push(n[i]);
+                visitados.Add(n[i]); //// guardo donde ya paso
+            }
+            n = new List<string>();
+}
+            while (cons.Count() > 0)
+            {
+                n=obtengo_estados_epsido(cons.Pop(),caracter);                
+                if (n.Count() > 0) { 
+                for (int i = 0; i < n.Count(); i++)
+                {
+                    cons.Push(n[i]);
+                    visitados.Add(n[i]); //// guardo donde ya paso
+                }
+                }
+                n = new List<string>();          
+            }        
+            return visitados;
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 
         private static void GenerateGraph(string fileName, string path)
-        {
-
-            // se manda a llamar asi GenerateGraph("Grafica.txt", "C:\\Users\\ADMIN\\Desktop");
+        {// se manda a llamar asi GenerateGraph("Grafica.txt", "C:\\Users\\ADMIN\\Desktop");
             try
             {
                 var command = string.Format("dot -Tjpg {0} -o {1}", Path.Combine(path, fileName), Path.Combine(path, fileName.Replace(".txt", ".jpg")));
@@ -60,28 +127,105 @@ namespace Proyecto_1
                 var proc = new System.Diagnostics.Process();
                 //probar si este no desplega la ventana de cmd
                 proc.StartInfo.UseShellExecute = false;
-
                 proc.StartInfo = procStartInfo;
                 proc.Start();
                 proc.WaitForExit();
             }
             catch
-            {
-                MessageBox.Show("error");
+            { MessageBox.Show("error");
             }
         }
-
         private static void archivoTxt(string nombre, string cadena_ghrapviz)
-        {
-
-            using (StreamWriter outputFile = new StreamWriter( nombre + ".txt")) {
-
+        { using (StreamWriter outputFile = new StreamWriter( nombre + ".txt")) {
                 outputFile.WriteLine(cadena_ghrapviz);
+                };  }
 
-            };
+
+
+
+        /// 
+        /// Procedimiento para encontrar la Tabla de AFD
+        /// 
+
+
+
+
+        private List<string> genero_AFD(string nombre_nodo, List<string> intervalo2, List<string> alfabeto)
+        {
+            List<string> existentes = new List<string>();
+            List<List<Class_Clausura>> total = new List<List<Class_Clausura>>();
+            List<Class_Clausura> fila = new List<Class_Clausura>();
+            Stack<string> cons = new Stack<string>();
+
+            Class_Clausura inicial = new Class_Clausura();          
+            inicial.addSub1(nombre_nodo); inicial.addSub2(intervalo2);
+            fila.Add(inicial); //ingreso el primer Nodo que recibo
+
+
+            Class_Clausura nodo = new Class_Clausura();
+            ///genero primer intervalo del primer caracter
+            foreach (string caracter in alfabeto) {
+                nodo = new Class_Clausura();
+                foreach (string numero in intervalo2) { 
+                   List<string> aux= obtengo_estados_epsido(numero, caracter);
+                    if (aux.Count() > 0) { for (int a = 0; a < aux.Count(); a++) { nodo.addSub1(aux[a]) ; } } ///si la lista obtenida es mas de uno los ingreso al primer intervalo
+
+
+
+            }
+         
+        /// ingreso el nodo a la lista de fila
+        }
+
+
+
+
+
+
+
+
+            List<string> visitados = new List<string>();
+            List<string> n = new List<string>();
+            
+            n = obtengo_estados_epsido(nombre_nodo, caracter);
+            if (n.Count() > 0)
+            {
+                for (int i = 0; i < n.Count(); i++)
+                {
+                    cons.Push(n[i]);
+                    visitados.Add(n[i]); //// guardo donde ya paso
+                }
+                n = new List<string>();
+            }
+            while (cons.Count() > 0)
+            {
+                n = obtengo_estados_epsido(cons.Pop(), caracter);
+                if (n.Count() > 0)
+                {
+                    for (int i = 0; i < n.Count(); i++)
+                    {
+                        cons.Push(n[i]);
+                        visitados.Add(n[i]); //// guardo donde ya paso
+                    }
+                }
+                n = new List<string>();
+            }
+            return visitados;
+
 
 
         }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -110,6 +254,8 @@ namespace Proyecto_1
             Expresiones = new List<Class_nodos>();
              Lexemas = new List<Class_nodos>();
              Comentarios = new List<Class_nodos>();
+
+            Tabla_epsido_aux = new List<List<Class_alfabeto>>();
             ////////////////////////////////////////////// termina seteo
 
             while (iterador < cadena.Length)
@@ -271,6 +417,8 @@ namespace Proyecto_1
                     nuevo4.setColumna(columna - 1); nuevo4.setFila(fila); Tokens.Add(nuevo4); concatenar = "";//Conjuntos.Add(nuevo3); 
                     for (int j = 0; j < cadena.Length; j++)
                     {
+
+                        if (cadena[iterador] == ' '  && cadena[iterador -1] == '"' && cadena[iterador+ 1] == '"' && cadena[iterador +2] == ' ') { concatenar = concatenar + cadena[iterador]; }
                         if (cadena[iterador] != ' ' && cadena[iterador] != ';' && cadena[iterador] != '\n') { concatenar = concatenar + cadena[iterador]; } //si es diferente a espacio concatena
                         if (cadena[iterador] == '\n') {  break; }
                         iterador++;
@@ -324,19 +472,19 @@ namespace Proyecto_1
                 // }
 
 
-            //   richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
+             //richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
-            //            foreach (Class_nodos pa in Tokens)
-            //       {
-            //           richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-            //       }
+            //           foreach (Class_nodos pa in Tokens)
+              //     {
+               //      richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+                //  }
 
-            //      richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
+    //         richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
 
-            //        foreach (Class_nodos pa in Conjuntos)
-            //      {
-            //      richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-            //        }
+       //        foreach (Class_nodos pa in Conjuntos)
+        //      {
+          //     richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+            //      }
 
 
 
@@ -359,12 +507,14 @@ namespace Proyecto_1
             List<List<Class_nodos>> AF = new List<List<Class_nodos>>();// aca ingreso los nuevos nodos convertidos y queda el ultimo AFND final
             List<Class_nodos> sustituto = new List<Class_nodos>();            
             Stack<Class_nodos> cons = new Stack<Class_nodos>();//Pila donde voy ingresando los datos y AFN cuando voy generando el AFN total
+
+            List<string> caracteres_alfabeto = new List<string>();
             
             foreach (List<Class_nodos> lista in AFNS)  //En este for each recorro la lista de nodos de derecha a izquierda y voy ingresando en la pila cons
             { 
                 for (int i =lista.Count()-1 ; i>=0; i--)
                 {                  
-                //richTextBox2.Text = richTextBox2.Text + lista[i].getDato() + "     Tipo-nodo: " + lista[i].getTipoNodo() + "     Id: " + lista[i].getId() + '\n';
+               // richTextBox3.Text = richTextBox3.Text + lista[i].getDato() + "     Tipo-nodo: " + lista[i].getTipoNodo() + "     Id: " + lista[i].getId() + '\n';
 
                     if (lista[i].getDato() == "|" && lista[i].getTipoNodo()=="alter") ///Cuando detecto un operador alter
                     {
@@ -527,18 +677,23 @@ namespace Proyecto_1
 
 
                     } //cierro unoVarios 
-                    else { cons.Push(lista[i]); } // cuando no es ninguno de los operandos ingreso solamente a la pila
+                    else {
+                        caracteres_alfabeto.Add(lista[i].getDato());
+                        cons.Push(lista[i]); } // cuando no es ninguno de los operandos ingreso solamente a la pila
 
                  
 
 
                 }
 
-                if(cons.LongCount()!=0)
-                sustituto.Add(cons.Peek()); //ingreso en sustituto lo ultimo que quedo en la pila cons
+                if (cons.LongCount() != 0) {
+                Class_nodos aux = cons.Peek();
+                aux.setAlfabeto(caracteres_alfabeto);  /// ingreso la lista de caracteres en cada AFN resultante
+                sustituto.Add(aux); //ingreso en sustituto lo ultimo que quedo en la pila cons
+                }
                 AF.Add(sustituto); // luego ingreso la lista a  AF que es una lista de lista de nodos , don de en la primera posicion queda el AFN
                 sustituto = new List<Class_nodos>(); // seteo sustituto para seguir con la siguiente lista de nodos a trasformar
-
+                caracteres_alfabeto = new List<string>();
             
             }
 
@@ -550,45 +705,102 @@ namespace Proyecto_1
             List<List<Class_alfabeto>> Tabla_epsido = new List<List<Class_alfabeto>>();
            
             int cont = 0;
-          
+
 
             foreach (List<Class_nodos> lista in AF)
             { //testeo la lista generada de la expresion regular
-                richTextBox3.Text = richTextBox3.Text +" lista numero: "+lista.Count()+ " -----------------------------------------------\n";
+                richTextBox3.Text = richTextBox3.Text + " lista numero: " + lista.Count() + " -----------------------------------------------\n";
+                lista[0].quitarRepitencia_alfabeto();//quito repitencia en elfabeto
+                List<string> alf = lista[0].getAlfabeto();
+                if (alf.Count() > 0) { // Aca imprimo el Alfabeto 
+                for (int k = 0; k <alf.Count();k++) {
+                        richTextBox3.Text = richTextBox3.Text + alf[k]+" ---- ";
+
+                }
+                    richTextBox3.Text = richTextBox3.Text + "\n ";
+                }
+                
+
+
                 List<Class_nodos> comodin = lista;
                 for (int i = 0; i < comodin.Count(); i++)
                 {
                     cont++;
-                   // if (comodin[i].getDato() != " ") ///muestra los datos del ultimo afn que se quedo al recorrer alla arriba toda la ER
-                   // richTextBox3.Text = richTextBox3.Text + comodin[i].getDato() + "     Tipo-nodo: " + comodin[i].getTipoNodo() + "     Id: " + comodin[i].getId() + '\n';
-                    richTextBox3.Text = richTextBox3.Text + comodin[i].getAFN().generarTxt(); /// aca obtengo el String completo de Ghrapviz 
+                    if (comodin[i].getDato() != " ") ///muestra los datos del ultimo afn que se quedo al recorrer alla arriba toda la ER
+                    richTextBox3.Text = richTextBox3.Text + comodin[i].getDato() + "     Tipo-nodo: " + comodin[i].getTipoNodo() + "     Id: " + comodin[i].getId() + '\n';
+                    //richTextBox3.Text = richTextBox3.Text + comodin[i].getAFN().generarTxt(); /// aca obtengo el String completo de Ghrapviz 
                     archivoTxt(cont.ToString(), comodin[i].getAFN().generarTxt()); //con este metodo creo archivos.txt
                     nombre_archivos.Add(cont.ToString()); //guardo los nombres de archivos creados
 
                     GenerateGraph(cont.ToString()+".txt", "");  //con esto genero los png de las expresiones
 
 
-                    Tabla_epsido.Add(comodin[i].getAFN().tablaEpsido());
+                    Tabla_epsido.Add(comodin[i].getAFN().tablaEpsido()); // local
+                  Tabla_epsido_aux = Tabla_epsido;// Global Tabla_epsido_aux
 
 
                 }
-                 }
+            }
 
+
+
+            List<string> prueba = new List<string>();
+            
             foreach (List<Class_alfabeto> lista in Tabla_epsido)
-            {
+            {  //recorro las listas
                 richTextBox2.Text = richTextBox2.Text + " Nodos de Tompson ---------------------------- \n";
-                foreach (Class_alfabeto nodo in lista) { 
+                foreach (Class_alfabeto nodo in lista) {    //recorro los nodos
                     richTextBox2.Text = richTextBox2.Text + "Numero de nodo " + nodo.getnumeroNodo()+"\n";
-                 
-                foreach(Class_transiciones p in nodo.getIntervalo()) {
-                        richTextBox2.Text = richTextBox2.Text + "----------- Trans " + p.getNombre()+ "   Dir   "+ p.getDireccion() + "\n";
 
+
+
+                       prueba = sucesores_epsido(nodo.getnumeroNodo(), "£");
+                        nodo.setIntervalo_clausura(prueba); //guardo en cada nodo su clausura con £
+
+
+
+                    richTextBox2.Text = richTextBox2.Text + "alfabeto de cada nodo  \n";
+                 List < string> mux= nodo.getAlfabeto();
+                    for (int k = 0; k < mux.Count(); k++) {
+                        richTextBox2.Text = richTextBox2.Text + mux[k] + "  --  ";
+                    }
+                    richTextBox2.Text = richTextBox2.Text + " \n";
+
+
+
+
+                    if (prueba.Count() > 0)
+                        {
+                          for(int i=0;i<prueba.Count();i++)
+                           richTextBox2.Text = richTextBox2.Text + prueba[i] +"\n";
+
+
+                         prueba = new List<string>();
+                        }
                     }
 
+                }    Tabla_epsido_aux = Tabla_epsido; //guardo los cambios en la otra tabla
+                 
+
+             
 
 
-                }
-                 } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }//cierro metodo analizar
                 
 
 
@@ -723,6 +935,8 @@ namespace Proyecto_1
             Expresiones = new List<Class_nodos>();
             Lexemas = new List<Class_nodos>();
             Comentarios = new List<Class_nodos>();
+
+            Tabla_epsido_aux = new List<List<Class_alfabeto>>();
 
 
         }

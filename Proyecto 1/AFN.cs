@@ -17,10 +17,24 @@ namespace Proyecto_1
         int size = 0;
 
 
+        List<string> alfabeto = new List<string>();
+
+
         public AFN()
         {
             inicio = null;
             final = null;
+
+        }
+
+
+        public void setAlfabeto(List<string> a)
+        {
+            this.alfabeto = a;
+        }
+        public List<string> getAlfabeto()
+        {
+            return alfabeto;
 
         }
 
@@ -337,7 +351,7 @@ namespace Proyecto_1
             while (aux != null)
             {
                 
-                Class_alfabeto n = new Class_alfabeto();
+                Class_alfabeto n = new Class_alfabeto();   n.setAlfabeto(this.alfabeto);
                 n.setnumeroNodo(aux.getContadorNodo().ToString());
                 for (int j = 0; j < aux.getListTransiciones().Count(); j++)
                 {                  
@@ -351,7 +365,7 @@ namespace Proyecto_1
                 if (aux.getNext2() != null)
                 {
                     auxnext2 = aux.getNext2();
-                   Class_alfabeto n2 = new Class_alfabeto();
+                   Class_alfabeto n2 = new Class_alfabeto(); n2.setAlfabeto(this.alfabeto);
                     n2.setnumeroNodo(auxnext2.getContadorNodo().ToString());
 
                     

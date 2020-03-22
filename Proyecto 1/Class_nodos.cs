@@ -8,10 +8,10 @@ namespace Proyecto_1
 {
     public class Class_nodos
     {
-         Class_nodos next1;
+        Class_nodos next1;
 
-         Class_nodos next2;
-        
+        Class_nodos next2;
+
 
 
 
@@ -22,7 +22,7 @@ namespace Proyecto_1
         int columna;
         int fila;
 
-       
+
         List<Class_transiciones> transiciones = new List<Class_transiciones>();
 
 
@@ -30,6 +30,8 @@ namespace Proyecto_1
         public static int cont;
         private string tipoNodo; // tipo para nodos de afn
         private AFN automata;
+
+        List<string> alfabeto = new List<string>();
 
 
         public Class_nodos()
@@ -48,7 +50,48 @@ namespace Proyecto_1
 
         }
 
+        public void quitarRepitencia_alfabeto() {
+            List<string> result = new List<string>();
+            string aux;
+            Boolean esta = false;
 
+            for (int i = 0; i < alfabeto.Count();i++) {
+                esta = false;
+                aux = alfabeto[i];
+                for (int j = 0; j < result.Count(); j++)
+                {
+                    if (aux==result[j])
+                    {  esta = true;
+                    }
+                  
+
+
+
+                }
+
+                if (esta==false)
+                { result.Add(aux);}
+
+                }
+
+            setAlfabeto_AFN(result);
+            alfabeto = result;
+
+
+        }
+
+        public void setAlfabeto_AFN(List<string> a)
+        {
+            this.automata.setAlfabeto(a);
+        }
+
+        public void setAlfabeto(List<string> a) {
+            this.alfabeto = a;
+        }
+        public List<string> getAlfabeto() {
+            return alfabeto;
+
+        }
 
 
         public void setAFN(AFN b)

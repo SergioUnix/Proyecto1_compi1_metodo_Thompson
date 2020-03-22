@@ -1,0 +1,40 @@
+digraph G{ 
+ rankdir=LR; 
+node130; 
+node128; 
+node120;  
+node121;  
+node123;  
+node124; 
+node125; 
+node127; 
+node129; 
+node131; 
+node133; 
+node135; 
+node119; 
+node114; 
+node115; 
+node117; 
+node130-> node128[label = "£"];  
+node130-> node131[label = "£"];  
+node128-> node124[label = "£"];  
+node128-> node120[label = "£"];  
+node120-> node121[label = "a"]; 
+node121-> node123[label = "b"]; 
+node123-> node129[label = "£"]; 
+node124-> node125[label = "c"];  
+node125-> node127[label = "d"];  
+node127-> node129[label = "£"];  
+node129-> node131[label = "£"];  
+node129-> node128[label = "£"];  
+node131-> node133[label = "b"];  
+node133-> node135[label = "c"];  
+node135-> node119[label = "d"];  
+node119-> node114[label = "£"];  
+node119-> node117[label = "£"];  
+node114-> node115[label = "d"];  
+node115-> node117[label = "£"];  
+node115-> node114[label = "£"];  
+} 
+

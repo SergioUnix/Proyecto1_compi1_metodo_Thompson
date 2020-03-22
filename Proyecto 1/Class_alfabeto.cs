@@ -12,12 +12,59 @@ namespace Proyecto_1
         string letra;
         List<Class_transiciones> intervalo = new List<Class_transiciones>();
 
+
+        List<string> intervalo_clausura = new List<string>();
+
+        //List<string> alfabeto_total = new List<string>();
+
+
+        List<string> alfabeto = new List<string>();
+
+
+
         public Class_alfabeto()
         {
             this.numeroNodo = "";
             this.letra = "";
             
         }
+
+
+
+        public void setAlfabeto(List<string> a)
+        {
+            this.alfabeto = a;
+        }
+        public List<string> getAlfabeto()
+        {
+            return alfabeto;
+
+        }
+
+
+       // public void addAlfabeto(string a)
+        //{
+         //  this.alfabeto_total.Add(a);
+       // }
+       // public List<string> get_listAlfabeto()
+        //{
+         //   return this.alfabeto_total;
+        //}
+
+
+
+
+        public void setIntervalo_clausura(List<string> a)
+        {
+            this.intervalo_clausura = a;
+        }
+        public void addIntervalo_clausura(string a)
+        {
+            this.intervalo_clausura.Add(a);
+        }
+
+
+
 
         public Boolean existeC_intervalo(string a) { ///verifico si existe el nodo
             Boolean result = false;
