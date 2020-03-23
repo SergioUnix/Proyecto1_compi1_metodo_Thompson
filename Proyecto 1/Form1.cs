@@ -147,10 +147,63 @@ namespace Proyecto_1
         /// Procedimiento para encontrar la Tabla de AFD
         /// 
 
+        private List<string> union_lista_sucesores(List<string> intervalo_de_nodos)   ///este metodo devuelve la  union de sucesores de un intervalo ejemplo {3,8}  y hace {1,2,3,4,5,6,7,8} sin repetir
+        {
+
+            List<string> n = new List<string>();
+            foreach (List<Class_alfabeto> lista in Tabla_epsido_aux)
+            {  //recorro las listas               
+                foreach (Class_alfabeto nodo in lista)
+                {    //recorro los nodos              
+                    
+                    
+                    for(int k = 0; k < intervalo_de_nodos.Count(); k++) {
+                        if (nodo.getnumeroNodo() == intervalo_de_nodos[k])
+                        {
+
+                            List<string> hel = nodo.getIntervalo_clausura();
+                            if (hel.Count() > 0){ for (int j = 0; j < hel.Count(); j++) { n.Add(hel[j]);    } } //cuando obtengo el intervalo clausura lo ingreso a n, valores puede ir repetidos
+
+                      }///cierro el if
+                    }  //ciero For
+                } //cierro for each 2
 
 
 
-        private List<string> genero_AFD(string nombre_nodo, List<string> intervalo2, List<string> alfabeto)
+
+            } //cierro for each 1
+
+
+            ///////////aca quito los nodos repetidos para luego devolverlos
+            List<string> result = new List<string>();
+            string aux;
+            Boolean esta = false;
+           for (int i = 0; i < n.Count(); i++)
+           {
+                esta = false;
+                aux = n[i];
+                for (int j = 0; j < result.Count(); j++)
+                {   if (aux == result[j]){esta = true;  }               }
+                if (esta == false)
+                { result.Add(aux); }
+             }
+            n = result;
+
+
+            return n;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        private List<Class_Clausura> genero_AFD(string nombre_nodo, List<string> intervalo2, List<string> alfabeto)
         {
             List<string> existentes = new List<string>();
             List<List<Class_Clausura>> total = new List<List<Class_Clausura>>();
@@ -163,54 +216,31 @@ namespace Proyecto_1
 
 
             Class_Clausura nodo = new Class_Clausura();
+
             ///genero primer intervalo del primer caracter
             foreach (string caracter in alfabeto) {
                 nodo = new Class_Clausura();
-                foreach (string numero in intervalo2) { 
-                   List<string> aux= obtengo_estados_epsido(numero, caracter);
-                    if (aux.Count() > 0) { for (int a = 0; a < aux.Count(); a++) { nodo.addSub1(aux[a]) ; } } ///si la lista obtenida es mas de uno los ingreso al primer intervalo
+                foreach (string numero in intervalo2) {  // dentro de este gestione el intervalo 1 de el nodo n
+                    List<string> aux = new List<string>();
+                        aux =obtengo_estados_epsido(numero, caracter);//los ingreso al primer intervalo
+                    if (aux.Count() > 0) {
+                       // richTextBox3.Text = richTextBox3.Text + aux[0] + "\n";
+                        for (int a = 0; a < aux.Count(); a++) { nodo.addSub1(aux[a]) ; }
+                    } ///si la lista obtenida es mas de uno los ingreso al primer intervalo
+                  }
+                   //union de suscesores dados los nodos ejemplo de nodos {3,8}
+                   nodo.addSub2( union_lista_sucesores(nodo.getSub1())    );
+                    //ingreso al nodo tambien el caracter por donde paso
+                    nodo.setcaracter_encontrado(caracter);
+                fila.Add(nodo);
 
 
-
-            }
          
-        /// ingreso el nodo a la lista de fila
+       
         }
 
 
-
-
-
-
-
-
-            List<string> visitados = new List<string>();
-            List<string> n = new List<string>();
-            
-            n = obtengo_estados_epsido(nombre_nodo, caracter);
-            if (n.Count() > 0)
-            {
-                for (int i = 0; i < n.Count(); i++)
-                {
-                    cons.Push(n[i]);
-                    visitados.Add(n[i]); //// guardo donde ya paso
-                }
-                n = new List<string>();
-            }
-            while (cons.Count() > 0)
-            {
-                n = obtengo_estados_epsido(cons.Pop(), caracter);
-                if (n.Count() > 0)
-                {
-                    for (int i = 0; i < n.Count(); i++)
-                    {
-                        cons.Push(n[i]);
-                        visitados.Add(n[i]); //// guardo donde ya paso
-                    }
-                }
-                n = new List<string>();
-            }
-            return visitados;
+            return fila;
 
 
 
@@ -780,9 +810,44 @@ namespace Proyecto_1
                     }
 
                 }    Tabla_epsido_aux = Tabla_epsido; //guardo los cambios en la otra tabla
-                 
 
-             
+
+
+
+
+            foreach (List<Class_alfabeto> lista in Tabla_epsido_aux)
+            {  //recorro las listas               
+                List<Class_Clausura> clau = new List<Class_Clausura>();
+                richTextBox3.Text = richTextBox3.Text + "Nodo  " + lista[0].getnumeroNodo() + "  Intervalo £ : " + lista[0].getIntervalo_imprimir() + "  Clausura " + lista[0].getIntervalo_clausura_imprimir() + "\n";
+
+
+                  clau = genero_AFD(lista[0].getnumeroNodo(), lista[0].getIntervalo_clausura(), lista[0].getAlfabeto());
+
+
+
+                foreach(Class_Clausura p in clau) { 
+                      richTextBox3.Text = richTextBox3.Text+ "caracter :  "+p.getcaracter_encontrado()+ "  inter1 = " + p.getSub1_imprimir() + "  inter2 = " + p.getSub2_imprimir()+ "\n";
+                       }
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

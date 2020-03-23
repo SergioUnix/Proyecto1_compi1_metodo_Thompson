@@ -58,6 +58,26 @@ namespace Proyecto_1
         {
             this.intervalo_clausura = a;
         }
+        public List<string> getIntervalo_clausura()
+        {
+            return this.intervalo_clausura;
+        }
+
+        public string getIntervalo_clausura_imprimir()
+        {
+            string result="";
+            for (int i = 0; i < intervalo_clausura.Count(); i++) { result = result + intervalo_clausura[i] + ","; }
+            return result;
+
+        }
+        public string getIntervalo_imprimir()
+        {
+            string result = "";
+            for (int i = 0; i < intervalo.Count(); i++) { result = result + intervalo[i].getDireccion() + ","; }
+            return result;
+
+        }
+
         public void addIntervalo_clausura(string a)
         {
             this.intervalo_clausura.Add(a);

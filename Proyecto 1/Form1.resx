@@ -127,8 +127,7 @@ CONJ: letra -&gt; a~z;
 !&gt;
 
 //Expresiones Regulares
-er1 -&gt; . {letra} *|{letra} |  {digito} "_";
-er2 -&gt; . . . *| ."c""d" . "a" "b" "b" "c" +"d"
+er1 -&gt; . . . * |  {A} "B" "A" "B" "B";
 
 
 &lt;!
