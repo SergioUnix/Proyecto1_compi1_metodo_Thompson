@@ -14,6 +14,8 @@ namespace Proyecto_1
 
         string caracter_encontrado;
 
+        Boolean aceptacion;
+
 
 
 
@@ -23,9 +25,14 @@ namespace Proyecto_1
             this.sub1 = new List<string>();
             this.sub2 = new List<string>();
             this.caracter_encontrado = "";
-
+            this.aceptacion = false;
         }
 
+
+        public void setAceptacion()
+        {
+            this.aceptacion = true;
+        }
 
         public string getSub1_imprimir()
         {

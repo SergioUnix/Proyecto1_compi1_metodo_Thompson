@@ -201,20 +201,20 @@ namespace Proyecto_1
 
 
 
+        /////este metodo genera la ultima tabla de transiciones de AFD
 
-
-        private List<Class_Clausura> genero_AFD(string nombre_nodo, List<string> intervalo2, List<string> alfabeto)
+        private List<Class_Clausura> genero_AFD(string nombr, List<string> intervalo, List<string> alfabeto)
         {
-            List<string> existentes = new List<string>();
+            List<string> nombre_nodo = new List<string>();            nombre_nodo.Add(nombr);
+            List<string> intervalo2 = new List<string>();             intervalo2 = intervalo;
+   
             List<List<Class_Clausura>> total = new List<List<Class_Clausura>>();
             List<Class_Clausura> fila = new List<Class_Clausura>();
+
+            List<string> existentes = new List<string>();
             Stack<string> cons = new Stack<string>();
 
-            Class_Clausura inicial = new Class_Clausura();          
-            inicial.addSub1(nombre_nodo); inicial.addSub2(intervalo2);
-            fila.Add(inicial); //ingreso el primer Nodo que recibo
-
-
+            Class_Clausura inicial = new Class_Clausura(); inicial.addSub1(nombre_nodo); inicial.addSub2(intervalo2); fila.Add(inicial); //ingreso el primer Nodo que recibo
             Class_Clausura nodo = new Class_Clausura();
 
             ///genero primer intervalo del primer caracter
@@ -232,12 +232,12 @@ namespace Proyecto_1
                    nodo.addSub2( union_lista_sucesores(nodo.getSub1())    );
                     //ingreso al nodo tambien el caracter por donde paso
                     nodo.setcaracter_encontrado(caracter);
-                fila.Add(nodo);
+                    fila.Add(nodo);
 
 
          
        
-        }
+        }//cierro el forech de alfabeto
 
 
             return fila;
@@ -245,6 +245,15 @@ namespace Proyecto_1
 
 
         }
+
+
+
+
+
+
+
+
+
 
 
 
