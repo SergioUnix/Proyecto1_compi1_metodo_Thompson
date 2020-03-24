@@ -197,54 +197,205 @@ namespace Proyecto_1
 
 
 
+        private Boolean igualdad(Class_Clausura parametro, List<Class_Clausura> existentes)
+        {
+            string intervalo = parametro.getSub2_imprimir();
+            Boolean result = false;
+            for (int i = 0; i < existentes.Count(); i++) {
+                if (intervalo == existentes[i].getSub2_imprimir()) { result = true;  }
+
+            }
+
+                return result;
+        }
 
 
 
 
         /////este metodo genera la ultima tabla de transiciones de AFD
 
-        private List<Class_Clausura> genero_AFD(string nombr, List<string> intervalo, List<string> alfabeto)
+        private List<List<Class_Clausura>> genero_AFD(string nombr, List<string> intervalo, List<string> alfabeto)
         {
-            List<string> nombre_nodo = new List<string>();            nombre_nodo.Add(nombr);
-            List<string> intervalo2 = new List<string>();             intervalo2 = intervalo;
-   
+
             List<List<Class_Clausura>> total = new List<List<Class_Clausura>>();
             List<Class_Clausura> fila = new List<Class_Clausura>();
+            List<Class_Clausura> existentes = new List<Class_Clausura>();
+            Queue<Class_Clausura> cons = new Queue<Class_Clausura>();
 
-            List<string> existentes = new List<string>();
-            Stack<string> cons = new Stack<string>();
 
-            Class_Clausura inicial = new Class_Clausura(); inicial.addSub1(nombre_nodo); inicial.addSub2(intervalo2); fila.Add(inicial); //ingreso el primer Nodo que recibo
+            List<string> nombre_nodo = new List<string>(); nombre_nodo.Add(nombr);
+            List<string> intervalo2 = new List<string>(); intervalo2 = intervalo;
+            intervalo2.Add(nombr); // ingreso el intervalo 1 al intervalo2 
+
+
+
+            Class_Clausura inicial = new Class_Clausura(); inicial.addSub1(nombre_nodo); inicial.addSub2(intervalo2); inicial.setcaracter_encontrado("cabecera");
+            existentes.Add(inicial); cons.Enqueue(inicial);
+            fila.Add(inicial); //ingreso el primer Nodo que recibo
+
+
             Class_Clausura nodo = new Class_Clausura();
 
-            ///genero primer intervalo del primer caracter
-            foreach (string caracter in alfabeto) {
-                nodo = new Class_Clausura();
-                foreach (string numero in intervalo2) {  // dentro de este gestione el intervalo 1 de el nodo n
-                    List<string> aux = new List<string>();
-                        aux =obtengo_estados_epsido(numero, caracter);//los ingreso al primer intervalo
-                    if (aux.Count() > 0) {
-                       // richTextBox3.Text = richTextBox3.Text + aux[0] + "\n";
-                        for (int a = 0; a < aux.Count(); a++) { nodo.addSub1(aux[a]) ; }
-                    } ///si la lista obtenida es mas de uno los ingreso al primer intervalo
-                  }
-                   //union de suscesores dados los nodos ejemplo de nodos {3,8}
-                   nodo.addSub2( union_lista_sucesores(nodo.getSub1())    );
-                    //ingreso al nodo tambien el caracter por donde paso
-                    nodo.setcaracter_encontrado(caracter);
-                    fila.Add(nodo);
 
 
+         //   while (cons.Count() > 0)
+         //   {
+                if (intervalo2 != null)
+                {
+
+
+
+                    ///genero primer intervalo del primer caracter
+                    foreach (string caracter in alfabeto)
+                    {
+                        nodo = new Class_Clausura();
+                        foreach (string numero in intervalo2)
+                        {  // dentro de este gestione el intervalo 1 de el nodo n
+                            List<string> aux = new List<string>();
+                            aux = obtengo_estados_epsido(numero, caracter);//los ingreso al primer intervalo
+                            if (aux.Count() > 0)
+                            {
+                                // richTextBox3.Text = richTextBox3.Text + aux[0] + "\n";
+                                for (int a = 0; a < aux.Count(); a++) { nodo.addSub1(aux[a]); }
+                            } ///si la lista obtenida es mas de uno los ingreso al primer intervalo
+                        }
+
+
+                        //union de suscesores dados los nodos ejemplo de nodos {3,8}
+                        nodo.addSub2(union_lista_sucesores(nodo.getSub1()));
+
+                        List<string> rango = new List<string>();
+                        rango = nodo.getSub1();
+                        for (int a = 0; a < rango.Count(); a++) { nodo.addSub2(rango[a]); }
+
+                        //ingreso al nodo tambien el caracter por donde paso
+                        nodo.setcaracter_encontrado(caracter);
+                        fila.Add(nodo);
+
+                        Boolean re = false;
+                        re = igualdad(nodo, existentes);
+                        richTextBox3.Text = richTextBox3.Text + " valor de igualdad for alfabeto :  " + re + "\n";
+
+                        if (re == false) { cons.Enqueue(nodo); existentes.Add(nodo); }
+
+                    }//cierro el forech de alfabeto
+
+
+
+                    total.Add(fila);
+                    fila = new List<Class_Clausura>();
+                   // intervalo2 = null;
+
+                } // cierro el if   
          
-       
-        }//cierro el forech de alfabeto
+
+                    Class_Clausura como = new Class_Clausura(); como = cons.Dequeue(); 
 
 
-            return fila;
+                    richTextBox3.Text = richTextBox3.Text + " valor de igualdad :  " + igualdad(como, existentes) + "\n";
+                    if (igualdad(como, existentes) == false)
+                    {
+                        como.setcaracter_encontrado("cabecera");
+                        existentes.Add(como);
+                        intervalo2 = como.getSub2(); // setero el intervalo 2 
+
+                        fila.Add(como); //ingreso el primer Nodo que recibo
+                    
+                    }
+                    else if (igualdad(como, existentes) == true)
+                    {
+                        intervalo2 = null;
+                    }
+
+                    // if (cons.Count() > 0)
+                    // richTextBox3.Text = richTextBox3.Text + cons.Dequeue().getSub2_imprimir() +"dddddddddd\n";
+
+
+                    // if (cons.Count() > 0)
+                    // richTextBox3.Text = richTextBox3.Text + cons.Dequeue().getSub2_imprimir() + "\n";
+
+
+
+                    // if (cons.Count() > 0)
+                    //   richTextBox3.Text = richTextBox3.Text + cons.Dequeue().getSub2_imprimir() + "\n";
+
+
+               
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // }//cierro el while
+
+
+
+
+            return total;
 
 
 
         }
+
+
+
+
+
+
 
 
 
@@ -823,24 +974,26 @@ namespace Proyecto_1
 
 
 
-
+            List<List<Class_Clausura>> clau = new List<List<Class_Clausura>>();
             foreach (List<Class_alfabeto> lista in Tabla_epsido_aux)
             {  //recorro las listas               
-                List<Class_Clausura> clau = new List<Class_Clausura>();
-                richTextBox3.Text = richTextBox3.Text + "Nodo  " + lista[0].getnumeroNodo() + "  Intervalo £ : " + lista[0].getIntervalo_imprimir() + "  Clausura " + lista[0].getIntervalo_clausura_imprimir() + "\n";
+
+                richTextBox3.Text = richTextBox3.Text + "Nodo  " + lista[0].getnumeroNodo() + "  Intervalo £ : " + lista[0].getIntervalo_imprimir() + "  Clausura " + lista[0].getIntervalo_clausura_imprimir() + "\n"+"\n";
 
 
-                  clau = genero_AFD(lista[0].getnumeroNodo(), lista[0].getIntervalo_clausura(), lista[0].getAlfabeto());
+                clau = genero_AFD(lista[0].getnumeroNodo(), lista[0].getIntervalo_clausura(), lista[0].getAlfabeto());
 
 
-
-                foreach(Class_Clausura p in clau) { 
-                      richTextBox3.Text = richTextBox3.Text+ "caracter :  "+p.getcaracter_encontrado()+ "  inter1 = " + p.getSub1_imprimir() + "  inter2 = " + p.getSub2_imprimir()+ "\n";
-                       }
+                foreach (List<Class_Clausura> fila in clau)
+                {
+                    foreach (Class_Clausura p in fila)
+                    {
+                        richTextBox3.Text = richTextBox3.Text + "caracter :  " + p.getcaracter_encontrado() + "  inter1 = " + p.getSub1_imprimir() + "  inter2 = " + p.getSub2_imprimir() + "\n";
+                    }
 
 
                 }
-
+            }
 
 
 
