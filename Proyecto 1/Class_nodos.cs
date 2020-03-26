@@ -80,6 +80,14 @@ namespace Proyecto_1
 
         }
 
+        public string getAlfabeto_imprimir()
+        {
+            string result = "";
+            for (int i = 0; i < this.alfabeto.Count(); i++) { result = result + this.alfabeto[i] + ","; }
+            return result;
+
+        }
+
         public void setAlfabeto_AFN(List<string> a)
         {
             this.automata.setAlfabeto(a);

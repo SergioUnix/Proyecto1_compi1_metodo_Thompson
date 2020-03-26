@@ -12,8 +12,10 @@ namespace Proyecto_1
         List<string> sub1;
         List<string> sub2;
 
-        string caracter_encontrado;
+        List<string> buscar;
 
+        string caracter_encontrado;
+        string cabecera;
         Boolean aceptacion;
 
 
@@ -25,6 +27,7 @@ namespace Proyecto_1
             this.sub1 = new List<string>();
             this.sub2 = new List<string>();
             this.caracter_encontrado = "";
+            this.cabecera = "";
             this.aceptacion = false;
         }
 
@@ -32,6 +35,15 @@ namespace Proyecto_1
         public void setAceptacion()
         {
             this.aceptacion = true;
+        }
+
+
+        public string getBuscar_imprimir()
+        {
+            string result = "";
+            for (int i = 0; i < this.buscar.Count(); i++) { result = result + this.buscar[i] + ","; }
+            return result;
+
         }
 
         public string getSub1_imprimir()
@@ -56,12 +68,25 @@ namespace Proyecto_1
         public void setcaracter_encontrado(string a)
         { this.caracter_encontrado = a; }
 
+
+        public string getCabecera()
+        { return this.cabecera; }
+        public void setCabecera(string j)
+        { this.cabecera=j; }
+
         public string getID()
         { return this.Id; }
         public void setID(string a)
         {
             this.Id = a;
         }
+
+        public List<string> getBuscar()
+        {
+            return this.buscar;
+
+        }
+
         public List<string> getSub1()
         {
            return this.sub1;
@@ -76,13 +101,23 @@ namespace Proyecto_1
             sub1.Add(v);
 
         }
+
+        public void addBuscar(List<string> b)
+        {
+            this.buscar = b;
+
+        }
         public void addSub1(List<string> b)
         {
             this.sub1 = b;
 
         }
 
+        public void addBuscar(string b)
+        {
+            buscar.Add(b);
 
+        }
 
         public void addSub2(string b)
         {
@@ -94,6 +129,19 @@ namespace Proyecto_1
             this.sub2=b;
 
         }
+        public void unirBuscar(List<string> a, List<string> b)
+        {
+            List<string> result = new List<string>();
+            for (int i = 0; i < a.Count(); i++) { result.Add(a[i]); }
+
+            for (int j = 0; j < b.Count(); j++) { result.Add(b[j]); }
+
+
+
+            this.buscar = result;
+
+        }
+
 
 
 
