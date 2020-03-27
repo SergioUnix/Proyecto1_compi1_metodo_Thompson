@@ -36,8 +36,14 @@ namespace Proyecto_1
 
         //esto es para los botones de las imagenes
         List<string> nombre_archivos = new List<string>();
-        int j = 0;
+        List<string> g_tabla = new List<string>();
+        List<string> t_tabla = new List<string>();
 
+
+
+        int j = 0;
+        int g = 0;
+        int t = 0;
 
         /// <summary>
         /// Tabla epsido para analizar
@@ -135,6 +141,11 @@ namespace Proyecto_1
             { MessageBox.Show("error");
             }
         }
+
+
+
+
+
         private static void archivoTxt(string nombre, string cadena_ghrapviz)
         { using (StreamWriter outputFile = new StreamWriter( nombre + ".txt")) {
                 outputFile.WriteLine(cadena_ghrapviz);
@@ -422,6 +433,8 @@ namespace Proyecto_1
 
             ////////////////////////////////////////////// Esto es para setear las variables al analizar otro archivo
             j = 0;
+            g = 0;
+            t = 0;
             pictureBox1.Image = null;
             nombre_archivos = new List<string>();
 
@@ -873,8 +886,9 @@ namespace Proyecto_1
                 if (cons.LongCount() != 0) {
                 Class_nodos aux = cons.Peek();
                 aux.setAlfabeto(caracteres_alfabeto);  /// ingreso la lista de caracteres en cada AFN resultante
-                sustituto.Add(aux); //ingreso en sustituto lo ultimo que quedo en la pila cons
+               sustituto.Add(aux); //ingreso en sustituto lo ultimo que quedo en la pila cons
                 }
+                sustituto[0].getAFN().estado_inicial(); //agrego un estado epsido al inicio
                 AF.Add(sustituto); // luego ingreso la lista a  AF que es una lista de lista de nodos , don de en la primera posicion queda el AFN
                 sustituto = new List<Class_nodos>(); // seteo sustituto para seguir con la siguiente lista de nodos a trasformar
                 caracteres_alfabeto = new List<string>();
@@ -996,13 +1010,13 @@ namespace Proyecto_1
 
                 foreach (List<Class_Clausura> fila in clau) {
                     foreach (Class_Clausura p in fila) {
-                        // richTextBox3.Text = richTextBox3.Text + "caracter :  " + p.getcaracter_encontrado() + "  inter1 = " + p.getSub1_imprimir() + "  inter2 = " + p.getSub2_imprimir() + "  Buscar  "+ p.getBuscar_imprimir()+ "  es  "+p.getCabecera() + "\n";
+                     richTextBox3.Text = richTextBox3.Text + "caracter :  " + p.getcaracter_encontrado() + "  inter1 = " + p.getSub1_imprimir() + "  inter2 = " + p.getSub2_imprimir() + "  Buscar  "+ p.getBuscar_imprimir()+ "  es  "+p.getCabecera() + "\n";
 
 
                         tabla.Add(p.getBuscar_imprimir());
 
                         Class_nodos comido = new Class_nodos();
-                        comido.setDato(p.getBuscar_imprimir()); comido.setAlfabeto(lista[0].getAlfabeto());
+                        comido.setDato(p.getBuscar_imprimir()); comido.setAlfabeto(lista[0].getAlfabeto()); comido.setTipoNodo(p.getcaracter_encontrado()); comido.setEstado_aceptacion(lista[0].getEstado_aceptacion());
                         tabla_nodos.Add(comido);
 
 
@@ -1086,37 +1100,56 @@ namespace Proyecto_1
 
             }
 
-
-                int columna = 0;
+                int cabecera_nodo = tabla_nodos_total[buscar_fila][0].getAlfabeto().Count();
+                int aun_cabecera = 0;
+            //////les doy nombre a todos los nodos de class_nodos donde estan las transiciones 
             foreach (Class_nodos cad in nod)
             {
-                richTextBox3.Text = richTextBox3.Text + "  nodo anali  " + cad.getDato() + "  se cambio " + cad.getId() + "\n";
+                richTextBox3.Text = richTextBox3.Text + "  nodo anali  " + cad.getDato() + "  se cambio " + cad.getId() + " cab---- "+  cabecera_nodo+ "\n";
 
 
                     for (int w = 0; w < tabla_nodos_total[buscar_fila].Count(); w++) {
-                        if (cad.getDato() == tabla_nodos_total[buscar_fila][w].getDato()) { tabla_nodos_total[buscar_fila][columna].setId(cad.getId());        }
+                        if (cad.getDato() == tabla_nodos_total[buscar_fila][w].getDato()) { tabla_nodos_total[buscar_fila][w].setId(cad.getId());        }
+
+
+                        if (aun_cabecera > cabecera_nodo) { aun_cabecera = 0; }
+
+                        if (aun_cabecera == 0) {
+                            tabla_nodos_total[buscar_fila][w].setTipoNodo("cabecera");
+
+
+                        }
+                       
+
+                     
+                       aun_cabecera++;
                     }
 
-                    columna++;
+                  
             }
 
-
-
-
-
+          
 
                 buscar_fila++;
             }
-            /////////// creo una lista de nodos cambiando los intervalos del afd por letras
+           
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                /////////// MUESTRO LOS NODOS CON SUS RESPECTIVOS INTERVALOS Y NOMBRES DADOS ARRIBA, TAMBIEN MUESTRO SU ALFABETO
 
-
-
-
-
-
-
-
-            foreach (List<Class_nodos> lNodos in tabla_nodos_total)
+                foreach (List<Class_nodos> lNodos in tabla_nodos_total)
             {
 
                 richTextBox3.Text = richTextBox3.Text + "////////////////////  nodos totales  \n";
@@ -1125,7 +1158,7 @@ namespace Proyecto_1
 
 
 
-                    richTextBox3.Text = richTextBox3.Text + "  dato  " + Nnodo.getDato() + " Id    " + Nnodo.getId() + "  alfa  " + Nnodo.getAlfabeto_imprimir() + "\n";
+                    richTextBox3.Text = richTextBox3.Text + "  dato  " + Nnodo.getDato() + " Id    " + Nnodo.getId() + "  alfa  " + Nnodo.getAlfabeto_imprimir() +  " tipo  "+Nnodo.getTipoNodo()+ "\n";
 
 
                 }
@@ -1134,6 +1167,192 @@ namespace Proyecto_1
 
 
 
+            List<string> lista_grap = new List<string>();
+
+            //////////////////////creo el text graphviz     para el AFD
+            foreach (List<Class_nodos> lNodos in tabla_nodos_total)
+            {
+
+
+
+
+                string linea1 = "digraph finite_state_machine { \n";
+                string linea2 = "rankdir = LR; size = \"8,5\" \n";
+                string linea3 = "node [shape = point ]; qi\nnode[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black]; ";
+                string linea4 = "\nnode[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; \n";
+                string lineafinal = "} \n";
+                string nodos = "";
+                string direcciones = "";
+
+
+                Class_nodos aux = lNodos[0];
+                Class_nodos auxnext2 = new Class_nodos();
+                string aceptacion = aux.getEstado_aceptacion();
+                string cadena_unix = "";
+                iterador = 0;
+                int primero= 0;
+
+                while (iterador < lNodos.Count())
+                {
+                    aux = lNodos[iterador];
+
+                    if (aux.getTipoNodo() == "cabecera")
+                    {
+                        if (primero == 0) { nodos = nodos + " qi ->" + aux.getId() + "\n"; primero++; }
+
+                        bool b = false;
+                        String tes = aux.getDato();
+                        char[] charArr = tes.ToCharArray();
+                        for (int i = 0; i < charArr.Count(); i++)
+                        {
+                            if (charArr[i] != ',') { cadena_unix = cadena_unix + charArr[i]; } else if (charArr[i] == ',') { cadena_unix = ""; }
+                            if (aceptacion == cadena_unix) { b = true; }
+
+                        }
+
+
+                        if (b == true) { linea3=linea3  + " " + aux.getId(); }
+
+                       
+                        nodos = nodos + "" + aux.getId() + "; \n";
+
+
+
+                        for (int j = iterador + 1; j < lNodos.Count(); j++)
+                        {
+                            Class_nodos aux2 = new Class_nodos();
+                            aux2 = lNodos[j];
+                            if (aux2.getTipoNodo() == "cabecera") { break; }
+
+                            string etiqueta = aux2.getTipoNodo();
+                            if (etiqueta == "\\n" || etiqueta == "\\t" || etiqueta == "\\r") { etiqueta = "\\" + etiqueta; }
+                            direcciones = direcciones + "" + aux.getId() + "-> " + aux2.getId() + "[label = \"" + etiqueta+ "\"];  \n";
+
+                        }
+
+
+                    }//cierro el if
+
+                    iterador++;
+
+                }
+               string total = linea1  +linea2 +linea3+linea4+nodos + direcciones + lineafinal;
+
+                richTextBox3.Text = richTextBox3.Text + total;
+
+
+
+
+                lista_grap.Add(total);
+
+
+
+
+
+
+            }
+
+
+
+
+
+            List<string> lista_grap_tabla = new List<string>();
+
+            //////////////////////creo el text graphviz    para la TABLA
+            foreach (List<Class_nodos> lNodos in tabla_nodos_total)
+            {
+
+
+
+
+                string linea1 = "digraph tabla{   \ntbl[ shape = plaintext \nlabel =< \n<table border = '2' cellborder = '1' color = 'black' cellspacing = '4' bgcolor=\"white\"> \n<tr> \n<td color =\"black\" colspan = '5'> TRANSICIONES </td> \n</tr> \n";
+                string lineafinal = "</table> \n>]; \n}\n";
+                string nodos = "";
+                string direcciones = "";
+
+                int parar = 0;
+
+                Class_nodos aux = lNodos[0];
+                Class_nodos auxnext2 = new Class_nodos();
+                iterador = 0;
+                while (iterador < lNodos.Count())
+                {
+
+                    
+
+
+                    aux = lNodos[iterador];
+
+                    if (aux.getTipoNodo() == "cabecera")
+                    {
+                        if (parar== 0) {
+                            parar++;         nodos = nodos + "<tr>\n";         nodos = nodos + "\t \t <td color =\"grey\">" + "Estados" + "</td> \n";
+                            for (int k = 0; k < aux.getAlfabeto().Count(); k++) { nodos = nodos + "\t \t <td color =\"black\">" + aux.getAlfabeto()[k] + "</td> \n"; }
+                            nodos = nodos + "</tr>\n";
+                        }
+
+
+
+
+
+                        nodos = nodos + "<tr>\n";
+                        nodos = nodos + "<td color =\"grey\">" + aux.getId() + "</td> \n";
+
+
+
+                        for (int j = iterador + 1; j < lNodos.Count(); j++)
+                        {
+                            Class_nodos aux2 = new Class_nodos();
+                            aux2 = lNodos[j];
+                            if (aux2.getTipoNodo() == "cabecera") { break; }
+
+                            nodos = nodos + "\t \t <td color =\"black\">" + aux2.getId() + "</td>  \n";
+
+                        }
+
+                        nodos = nodos + "</tr>  \n";
+
+                    }//cierro el if
+
+                    iterador++;
+
+                }
+                string total = linea1 + nodos + direcciones + lineafinal;
+
+
+                lista_grap_tabla.Add(total);
+
+
+                richTextBox3.Text = richTextBox3.Text + total;
+
+
+                }
+
+
+
+            ////////////////////////////////genero en jpg los archivos de AFD y Tabla
+
+            int al = 0;
+            foreach (string cara in lista_grap)
+            {
+                archivoTxt("G" + al, cara);   ////creo archivo txt
+
+                GenerateGraph("G" +al +".txt", "");  //con esto genero los png de las expresiones
+
+                al++;
+            }
+            g_tabla = lista_grap;
+            int al2 = 0;
+
+            foreach (string cara in lista_grap_tabla)
+            {
+                archivoTxt("T" + al2, cara);
+
+                GenerateGraph("T"+al2 + ".txt", "");  //con esto genero los png de las expresiones
+
+                al2++;
+            }
+            t_tabla = lista_grap_tabla;
 
 
 
@@ -1156,7 +1375,7 @@ namespace Proyecto_1
 
 
 
-            }//cierro metodo analizar
+        }//cierro metodo analizar
 
 
 
@@ -1273,6 +1492,8 @@ namespace Proyecto_1
             richTextBox2.Text = "";
             richTextBox3.Text = "";
             j = 0;
+            g = 0;
+            t = 0;
             pictureBox1.Image = null;
             nombre_archivos = new List<string>();
 
@@ -1337,6 +1558,92 @@ namespace Proyecto_1
 
 
 
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (g_tabla.Count() > 0)
+            {
+                g++;
+                if (g > g_tabla.Count())
+                {
+                    g = 1;
+                }
+                //this.pictureBox1.Size = new System.Drawing.Size(140, 140); // le da el tamaño al label
+                this.pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
+                this.pictureBox2.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
+                pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
+                pictureBox2.Image = Image.FromFile("G"+g+ ".jpg");
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (t_tabla.Count() > 0)
+            {
+                t++;
+                if (t > t_tabla.Count())
+                {
+                    t = 1;
+                }
+                //this.pictureBox1.Size = new System.Drawing.Size(140, 140); // le da el tamaño al label
+                this.pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
+                this.pictureBox3.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
+                pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
+                pictureBox3.Image = Image.FromFile("T" + t + ".jpg");
+            }
+
+
+
+
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (g_tabla.Count() > 0)
+            {
+                g--;
+                if (g < 1)
+                {
+                    g = g_tabla.Count();
+                }
+                //this.pictureBox1.Size = new System.Drawing.Size(140, 140); // le da el tamaño al label
+                this.pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
+                this.pictureBox2.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
+                pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
+                pictureBox2.Image = Image.FromFile("G" + g + ".jpg");
+            }
+
+
+
+
+
+
+
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (t_tabla.Count() > 0)
+            {
+                t--;
+                if (t < 1)
+                {
+                    t = t_tabla.Count();
+                }
+                //this.pictureBox1.Size = new System.Drawing.Size(140, 140); // le da el tamaño al label
+                this.pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;  // Establece SizeMode para centrar la imagen.
+                this.pictureBox3.BorderStyle = BorderStyle.Fixed3D;// Set the border style to a three-dimensional border.
+                pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage; // hace que la imagen se ajuste en el label donde se muestra
+                pictureBox3.Image = Image.FromFile("T" + t + ".jpg");
+            }
         }
     }
 }

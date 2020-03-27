@@ -33,6 +33,8 @@ namespace Proyecto_1
 
         List<string> alfabeto = new List<string>();
 
+        string estado_aceptacion = "";
+
 
         public Class_nodos()
         {
@@ -87,6 +89,16 @@ namespace Proyecto_1
             return result;
 
         }
+
+        public void setEstado_aceptacion(string a)
+        {
+            this.estado_aceptacion=a;
+        }
+        public string getEstado_aceptacion()
+        {
+           return this.estado_aceptacion;
+        }
+
 
         public void setAlfabeto_AFN(List<string> a)
         {

@@ -20,13 +20,25 @@ namespace Proyecto_1
 
         List<string> alfabeto = new List<string>();
 
-
+        string estado_aceptacion = "";
 
         public Class_alfabeto()
         {
             this.numeroNodo = "";
             this.letra = "";
             
+        }
+
+
+
+
+        public void setEstado_aceptacion(string a)
+        {
+            this.estado_aceptacion = a;
+        }
+        public string getEstado_aceptacion()
+        {
+            return this.estado_aceptacion;
         }
 
 

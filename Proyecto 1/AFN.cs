@@ -17,6 +17,8 @@ namespace Proyecto_1
         int size = 0;
 
 
+
+
         List<string> alfabeto = new List<string>();
 
 
@@ -37,6 +39,26 @@ namespace Proyecto_1
             return alfabeto;
 
         }
+
+
+        public void estado_inicial()
+        {
+            Class_nodos dark = new Class_nodos(); dark.aumentarcount(); dark.setTipoNodo("afn");// le da numeracion al nodo            
+            //Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("afn");// le da numeracion al nodo
+            dark.addTransicion(new Class_transiciones("£", this.inicio.getContadorNodo().ToString()));//punteros de i
+            dark.setNext1(this.inicio);
+            
+            this.inicio = dark; 
+             this.inicio.setEstado_aceptacion(this.final.getContadorNodo().ToString());
+        }
+
+
+
+
+
+
+
+
 
 
         public void primerAfn(string a)
@@ -307,25 +329,29 @@ namespace Proyecto_1
 
 
         public string generarTxt() {
-            string linea1 = "digraph G{ \n rankdir=LR; \n";
+
+            string linea1 = "digraph finite_state_machine { \n";
+            string linea2 = "rankdir = LR; size = \"8,5\" \n";
+            string linea3 = "node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N"+ this.final.getContadorNodo()+"\n";
+            string linea4 = "node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; \n";
             string lineafinal = "} \n";
             string nodos = "";
             string direcciones = "";
             Class_nodos aux = this.inicio;
             Class_nodos auxnext2 = new Class_nodos();
             while (aux!=null) {
-                nodos = nodos + "node" + aux.getContadorNodo() + "; \n";
+                nodos = nodos + "N" + aux.getContadorNodo() + "; \n";
                 for (int j = 0; j < aux.getListTransiciones().Count(); j++) {
-                     direcciones = direcciones + "node" + aux.getContadorNodo() + "-> node" + aux.getListTransiciones()[j].getDireccion() + "[label = \"" + aux.getListTransiciones()[j].getNombre() + "\"];  \n";
+                     direcciones = direcciones + "N" + aux.getContadorNodo() + "-> N" + aux.getListTransiciones()[j].getDireccion() + "[label = \"" + aux.getListTransiciones()[j].getNombre() + "\"];  \n";
                 }
                 if (aux.getNext2() != null) {
                              auxnext2 = aux.getNext2();
                     while (auxnext2 != null)
                     {
-                        nodos = nodos + "node" + auxnext2.getContadorNodo() + ";  \n";
+                        nodos = nodos + "N" + auxnext2.getContadorNodo() + ";  \n";
                         for (int j = 0; j < auxnext2.getListTransiciones().Count(); j++)
                         {
-                            direcciones = direcciones + "node" + auxnext2.getContadorNodo() + "-> node" + auxnext2.getListTransiciones()[j].getDireccion() + "[label = \"" + auxnext2.getListTransiciones()[j].getNombre() + "\"]; \n";
+                            direcciones = direcciones + "N" + auxnext2.getContadorNodo() + "-> N" + auxnext2.getListTransiciones()[j].getDireccion() + "[label = \"" + auxnext2.getListTransiciones()[j].getNombre() + "\"]; \n";
 
                         }
                         auxnext2 = auxnext2.getNext1();
@@ -333,7 +359,7 @@ namespace Proyecto_1
                     }
                 aux = aux.getNext1();
             }
-            string total = linea1 + nodos + direcciones + lineafinal;
+            string total = linea1 +linea2+linea3+linea4+ nodos + direcciones + lineafinal;
             return total;
         }
 
@@ -357,6 +383,7 @@ namespace Proyecto_1
                 {                  
                     n.setnumeroNodo(aux.getContadorNodo().ToString()); // agrego el numero del nodo en el cual recorro
                     n.addIntervalo(aux.getListTransiciones()[j]); //añado la transicion en la cual estoy recorriendo
+                    n.setEstado_aceptacion(aux.getEstado_aceptacion());                                             //////////////////////////////////////////// se añadio para pasar estado de aceptacion
                 }
                 lista.Add(n);
 

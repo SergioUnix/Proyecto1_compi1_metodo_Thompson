@@ -1,0 +1,41 @@
+digraph tabla{   
+tbl[ shape = plaintext 
+label =< 
+<table border = '2' cellborder = '1' color = 'black' cellspacing = '4' bgcolor="white"> 
+<tr> 
+<td color ="black" colspan = '5'> TRANSICIONES </td> 
+</tr> 
+<tr>
+	 	 <td color ="grey">Estados</td> 
+	 	 <td color ="black">B</td> 
+	 	 <td color ="black">A</td> 
+</tr>
+<tr>
+<td color ="grey">a</td> 
+	 	 <td color ="black">b</td>  
+	 	 <td color ="black">c</td>  
+</tr>  
+<tr>
+<td color ="grey">b</td> 
+	 	 <td color ="black">b</td>  
+	 	 <td color ="black">c</td>  
+</tr>  
+<tr>
+<td color ="grey">c</td> 
+	 	 <td color ="black">d</td>  
+	 	 <td color ="black">c</td>  
+</tr>  
+<tr>
+<td color ="grey">d</td> 
+	 	 <td color ="black">e</td>  
+	 	 <td color ="black">c</td>  
+</tr>  
+<tr>
+<td color ="grey">e</td> 
+	 	 <td color ="black">b</td>  
+	 	 <td color ="black">c</td>  
+</tr>  
+</table> 
+>]; 
+}
+

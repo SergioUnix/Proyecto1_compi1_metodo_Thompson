@@ -1,28 +1,32 @@
-digraph G{ 
- rankdir=LR; 
-node6; 
-node4; 
-node0;  
-node1;  
-node2; 
-node3; 
-node5; 
-node7; 
-node9; 
-node11; 
-node13; 
-node6-> node4[label = "£"];  
-node6-> node7[label = "£"];  
-node4-> node2[label = "£"];  
-node4-> node0[label = "£"];  
-node0-> node1[label = "B"]; 
-node1-> node5[label = "£"]; 
-node2-> node3[label = "A"];  
-node3-> node5[label = "£"];  
-node5-> node7[label = "£"];  
-node5-> node4[label = "£"];  
-node7-> node9[label = "A"];  
-node9-> node11[label = "B"];  
-node11-> node13[label = "B"];  
+digraph finite_state_machine { 
+rankdir = LR; size = "8,5" 
+node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N13
+node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
+N14; 
+N6; 
+N4; 
+N0;  
+N1;  
+N2; 
+N3; 
+N5; 
+N7; 
+N9; 
+N11; 
+N13; 
+N14-> N6[label = "£"];  
+N6-> N4[label = "£"];  
+N6-> N7[label = "£"];  
+N4-> N2[label = "£"];  
+N4-> N0[label = "£"];  
+N0-> N1[label = "B"]; 
+N1-> N5[label = "£"]; 
+N2-> N3[label = "A"];  
+N3-> N5[label = "£"];  
+N5-> N7[label = "£"];  
+N5-> N4[label = "£"];  
+N7-> N9[label = "A"];  
+N9-> N11[label = "B"];  
+N11-> N13[label = "B"];  
 } 
 
