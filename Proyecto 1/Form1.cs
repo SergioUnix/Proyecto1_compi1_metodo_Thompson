@@ -661,27 +661,33 @@ namespace Proyecto_1
 
 
 
-                // richTextBox2.Text = richTextBox2.Text + "------------- Comentarios \n";
+             richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
-                //        foreach (Class_nodos pa in Comentarios)
-                //   {
-                //       richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() + '\n';
-                // }
+                   foreach (Class_nodos pa in Tokens)
+                  {
+                   richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+              }
+
+          richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
+
+               foreach (Class_nodos pa in Conjuntos)
+              {
+             richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
+                 }
 
 
-             //richTextBox2.Text = richTextBox2.Text + "------------- Tokens \n";
 
-            //           foreach (Class_nodos pa in Tokens)
-              //     {
-               //      richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() +  "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-                //  }
 
-    //         richTextBox2.Text = richTextBox2.Text + "------------- Conjuntos \n";
 
-       //        foreach (Class_nodos pa in Conjuntos)
-        //      {
-          //     richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: "+pa.getId() + "   TIPO: " + pa.getTipo() + "   Colum: " + pa.getColumna() + "   Fila: " + pa.getFila() + '\n';
-            //      }
+
+              richTextBox2.Text = richTextBox2.Text + "------------- Comentarios \n";
+
+                        foreach (Class_nodos pa in Comentarios)
+                   {
+                      richTextBox2.Text = richTextBox2.Text + pa.getDato() + "   ID: " + pa.getId() + '\n';
+               }
+
+
 
 
 
@@ -1010,7 +1016,7 @@ namespace Proyecto_1
 
                 foreach (List<Class_Clausura> fila in clau) {
                     foreach (Class_Clausura p in fila) {
-                     richTextBox3.Text = richTextBox3.Text + "caracter :  " + p.getcaracter_encontrado() + "  inter1 = " + p.getSub1_imprimir() + "  inter2 = " + p.getSub2_imprimir() + "  Buscar  "+ p.getBuscar_imprimir()+ "  es  "+p.getCabecera() + "\n";
+        //             richTextBox3.Text = richTextBox3.Text + "caracter :  " + p.getcaracter_encontrado() + "  inter1 = " + p.getSub1_imprimir() + "  inter2 = " + p.getSub2_imprimir() + "  Buscar  "+ p.getBuscar_imprimir()+ "  es  "+p.getCabecera() + "\n";
 
 
                         tabla.Add(p.getBuscar_imprimir());
@@ -1082,7 +1088,7 @@ namespace Proyecto_1
                 //   
                 foreach (List<string> fil in lista_tabla)
                 {
-                richTextBox3.Text = richTextBox3.Text + " ///////////////   iteracion \n";
+             //   richTextBox3.Text = richTextBox3.Text + " ///////////////   iteracion \n";
                     List<string> result = new List<string>();
                     string aux; Boolean esta = false;
                     for (int i = 0; i < fil.Count(); i++)
@@ -1105,7 +1111,7 @@ namespace Proyecto_1
             //////les doy nombre a todos los nodos de class_nodos donde estan las transiciones 
             foreach (Class_nodos cad in nod)
             {
-                richTextBox3.Text = richTextBox3.Text + "  nodo anali  " + cad.getDato() + "  se cambio " + cad.getId() + " cab---- "+  cabecera_nodo+ "\n";
+            richTextBox3.Text = richTextBox3.Text + "  nodo anali  " + cad.getDato() + "  se cambio " + cad.getId() + " cab---- "+  cabecera_nodo+ "\n";
 
 
                     for (int w = 0; w < tabla_nodos_total[buscar_fila].Count(); w++) {
@@ -1152,13 +1158,13 @@ namespace Proyecto_1
                 foreach (List<Class_nodos> lNodos in tabla_nodos_total)
             {
 
-                richTextBox3.Text = richTextBox3.Text + "////////////////////  nodos totales  \n";
+     //           richTextBox3.Text = richTextBox3.Text + "////////////////////  nodos totales  \n";
                 foreach (Class_nodos Nnodo in lNodos)
                 {  ////////recorriendo noddos totales
 
 
 
-                    richTextBox3.Text = richTextBox3.Text + "  dato  " + Nnodo.getDato() + " Id    " + Nnodo.getId() + "  alfa  " + Nnodo.getAlfabeto_imprimir() +  " tipo  "+Nnodo.getTipoNodo()+ "\n";
+                 //   richTextBox3.Text = richTextBox3.Text + "  dato  " + Nnodo.getDato() + " Id    " + Nnodo.getId() + "  alfa  " + Nnodo.getAlfabeto_imprimir() +  " tipo  "+Nnodo.getTipoNodo()+ "\n";
 
 
                 }
@@ -1238,7 +1244,7 @@ namespace Proyecto_1
                 }
                string total = linea1  +linea2 +linea3+linea4+nodos + direcciones + lineafinal;
 
-                richTextBox3.Text = richTextBox3.Text + total;
+              //  richTextBox3.Text = richTextBox3.Text + total;
 
 
 
@@ -1323,7 +1329,7 @@ namespace Proyecto_1
                 lista_grap_tabla.Add(total);
 
 
-                richTextBox3.Text = richTextBox3.Text + total;
+              //  richTextBox3.Text = richTextBox3.Text + total;
 
 
                 }

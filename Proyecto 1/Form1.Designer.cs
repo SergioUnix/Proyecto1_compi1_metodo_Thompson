@@ -72,7 +72,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(25, 70);
+            this.richTextBox1.Location = new System.Drawing.Point(16, 31);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(913, 383);
             this.richTextBox1.TabIndex = 1;
@@ -173,7 +173,7 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(16, 521);
+            this.richTextBox2.Location = new System.Drawing.Point(16, 447);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(894, 261);
             this.richTextBox2.TabIndex = 7;
@@ -182,7 +182,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 498);
+            this.label3.Location = new System.Drawing.Point(13, 417);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 17);
             this.label3.TabIndex = 8;
@@ -191,7 +191,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(773, 471);
+            this.label4.Location = new System.Drawing.Point(850, 417);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 17);
             this.label4.TabIndex = 9;
@@ -199,9 +199,9 @@
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(12, 797);
+            this.richTextBox3.Location = new System.Drawing.Point(12, 725);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(898, 204);
+            this.richTextBox3.Size = new System.Drawing.Size(898, 225);
             this.richTextBox3.TabIndex = 10;
             this.richTextBox3.Text = "";
             // 
@@ -227,9 +227,9 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(955, 703);
+            this.pictureBox3.Location = new System.Drawing.Point(1084, 703);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(767, 288);
+            this.pictureBox3.Size = new System.Drawing.Size(540, 247);
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
