@@ -1,5 +1,5 @@
 digraph finite_state_machine { 
-rankdir = LR; size = "8,5" 
+rankdir = LR; size = "30" 
 node [shape = point ]; qi
 node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  e
 node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
@@ -9,15 +9,15 @@ b;
 c; 
 d; 
 e; 
-a-> b[label = "B"];  
-a-> c[label = "A"];  
-b-> b[label = "B"];  
-b-> c[label = "A"];  
-c-> d[label = "B"];  
-c-> c[label = "A"];  
-d-> e[label = "B"];  
-d-> c[label = "A"];  
-e-> b[label = "B"];  
-e-> c[label = "A"];  
+a-> b[label = "enter"];  
+a-> c[label = "letras"];  
+b-> b[label = "enter"];  
+b-> c[label = "letras"];  
+c-> d[label = "enter"];  
+c-> c[label = "letras"];  
+d-> e[label = "enter"];  
+d-> c[label = "letras"];  
+e-> b[label = "enter"];  
+e-> c[label = "letras"];  
 } 
 

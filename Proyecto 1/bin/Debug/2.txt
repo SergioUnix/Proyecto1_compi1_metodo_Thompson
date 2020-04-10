@@ -1,29 +1,30 @@
-digraph G{ 
- rankdir=LR; 
-node31; 
-node29; 
-node27; 
-node23;  
-node21;  
-node22;  
-node24;  
-node25; 
-node26; 
-node28; 
-node30; 
-node31-> node29[label = "£"];  
-node29-> node27[label = "£"];  
-node29-> node30[label = "£"];  
-node27-> node25[label = "£"];  
-node27-> node23[label = "£"];  
-node23-> node21[label = "£"]; 
-node23-> node19[label = "£"]; 
-node21-> node22[label = "\r"]; 
-node22-> node24[label = "£"]; 
-node24-> node28[label = "£"]; 
-node25-> node26[label = "\t"];  
-node26-> node28[label = "£"];  
-node28-> node30[label = "£"];  
-node28-> node27[label = "£"];  
+digraph finite_state_machine { 
+rankdir = LR; size = "20" 
+node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N21
+node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
+N26; 
+N24; 
+N25; 
+N27; 
+N23; 
+N18; 
+N19; 
+N14; 
+N15; 
+N17; 
+N21; 
+N26-> N24[label = "£"];  
+N24-> N25[label = "letras"];  
+N25-> N27[label = "£"];  
+N25-> N24[label = "£"];  
+N27-> N23[label = "num"];  
+N23-> N18[label = "£"];  
+N23-> N21[label = "£"];  
+N18-> N19[label = ":"];  
+N19-> N14[label = "£"];  
+N14-> N15[label = "letras"];  
+N15-> N17[label = "£"];  
+N15-> N14[label = "£"];  
+N17-> N21[label = "£"];  
 } 
 

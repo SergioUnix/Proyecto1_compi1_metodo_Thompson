@@ -43,12 +43,12 @@ namespace Proyecto_1
 
         public void estado_inicial()
         {
-            Class_nodos dark = new Class_nodos(); dark.aumentarcount(); dark.setTipoNodo("afn");// le da numeracion al nodo            
-            //Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("afn");// le da numeracion al nodo
-            dark.addTransicion(new Class_transiciones("£", this.inicio.getContadorNodo().ToString()));//punteros de i
-            dark.setNext1(this.inicio);
+            //Class_nodos dark = new Class_nodos(); dark.aumentarcount(); dark.setTipoNodo("afn");// le da numeracion al nodo            
             
-            this.inicio = dark; 
+           // dark.addTransicion(new Class_transiciones("£", this.inicio.getContadorNodo().ToString()));//punteros de i
+           // dark.setNext1(this.inicio);
+            
+          // this.inicio = dark; 
              this.inicio.setEstado_aceptacion(this.final.getContadorNodo().ToString());
         }
 
@@ -86,10 +86,11 @@ namespace Proyecto_1
         
         public void alter_afaf(AFN a, AFN b) {
             Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("alter");// le da numeracion al nodo            
-            Class_nodos f = new Class_nodos(); f.aumentarcount();// le da numeracion al nodo
+            Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("alter");  // le da numeracion al nodo
+
             i.addTransicion(new Class_transiciones("£",a.getInicio().getContadorNodo().ToString()));//punteros de i
             i.addTransicion(new Class_transiciones("£", b.getInicio().getContadorNodo().ToString()));//punteros de i
-            i.setNext1(a.getInicio()); a.getFinal().setNext1(f);   a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
+            i.setNext1(a.getInicio());  a.getFinal().setNext1(f);   a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
             i.setNext2(b.getInicio());  b.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
             //b.getFinal().setNext1(f); //tal vez de error al recorrer
             this.inicio = i; this.final = f;
@@ -223,29 +224,29 @@ namespace Proyecto_1
          this.inicio = i; this.final = f;
          }
 
-        // public void positiva_Cadena(string aa)
-        //{
+        public void positiva_Cadena(string aa)
+       {
 
-        //  AFN a = new Proyecto_1.AFN();
-        // a.primerAfn(aa);
+          AFN a = new Proyecto_1.AFN();
+         a.primerAfn(aa);
 
-        // Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("unoVarios");// le da numeracion al nodo            
-        // Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("unoVarios"); // le da numeracion al nodo
-        // i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
-        // i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
-        //  a.getFinal().addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString())); // hago una trans del a.final al a.inicio
-        // this.inicio = i; this.final = f;
-        // }
-
-
-
-
-        public void positiva_Cadena(string a)
-        {
-            AFN klee = new Proyecto_1.AFN();
-            klee.kleene_Cadena(a);                 //aca hago un afn con aux* que es la cerradura de kleen
-            concatenar_afCadena(a,klee);
+         Class_nodos i = new Class_nodos(); i.aumentarcount(); i.setTipoNodo("unoVarios");// le da numeracion al nodo            
+         Class_nodos f = new Class_nodos(); f.aumentarcount(); f.setTipoNodo("unoVarios"); // le da numeracion al nodo
+         i.addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString()));//punteros de i         
+         i.setNext1(a.getInicio()); a.getFinal().setNext1(f); a.getFinal().addTransicion(new Class_transiciones("£", f.getContadorNodo().ToString()));//punteros de a.final
+          a.getFinal().addTransicion(new Class_transiciones("£", a.getInicio().getContadorNodo().ToString())); // hago una trans del a.final al a.inicio
+         this.inicio = i; this.final = f;
         }
+
+
+
+
+     //   public void positiva_Cadena(string a)
+       // {
+        //    AFN klee = new Proyecto_1.AFN();
+         //   klee.kleene_Cadena(a);                 //aca hago un afn con aux* que es la cerradura de kleen
+          //  concatenar_afCadena(a,klee);
+        //}
 
 
 
@@ -331,7 +332,7 @@ namespace Proyecto_1
         public string generarTxt() {
 
             string linea1 = "digraph finite_state_machine { \n";
-            string linea2 = "rankdir = LR; size = \"8,5\" \n";
+            string linea2 = "rankdir = LR; size = \"20\" \n";
             string linea3 = "node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N"+ this.final.getContadorNodo()+"\n";
             string linea4 = "node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; \n";
             string lineafinal = "} \n";
@@ -339,6 +340,10 @@ namespace Proyecto_1
             string direcciones = "";
             Class_nodos aux = this.inicio;
             Class_nodos auxnext2 = new Class_nodos();
+            Class_nodos auxnext3 = new Class_nodos();
+            Class_nodos auxnext4 = new Class_nodos();
+            Class_nodos auxnext5 = new Class_nodos();
+
             while (aux!=null) {
                 nodos = nodos + "N" + aux.getContadorNodo() + "; \n";
                 for (int j = 0; j < aux.getListTransiciones().Count(); j++) {
@@ -354,6 +359,99 @@ namespace Proyecto_1
                             direcciones = direcciones + "N" + auxnext2.getContadorNodo() + "-> N" + auxnext2.getListTransiciones()[j].getDireccion() + "[label = \"" + auxnext2.getListTransiciones()[j].getNombre() + "\"]; \n";
 
                         }
+
+
+                        if (auxnext2.getNext2() != null)
+                        {
+                            auxnext3 = auxnext2.getNext2();
+                            while (auxnext3 != null)
+                            {
+                                nodos = nodos + "N" + auxnext3.getContadorNodo() + ";  \n";
+                                for (int j = 0; j < auxnext3.getListTransiciones().Count(); j++)
+                                {
+                                    direcciones = direcciones + "N" + auxnext3.getContadorNodo() + "-> N" + auxnext3.getListTransiciones()[j].getDireccion() + "[label = \"" + auxnext3.getListTransiciones()[j].getNombre() + "\"]; \n";
+
+                                }
+
+
+
+
+
+                                if (auxnext3.getNext2() != null)
+                                {
+                                    auxnext4 = auxnext3.getNext2();
+                                    while (auxnext4 != null)
+                                    {
+                                        nodos = nodos + "N" + auxnext4.getContadorNodo() + ";  \n";
+                                        for (int j = 0; j < auxnext4.getListTransiciones().Count(); j++)
+                                        {
+                                            direcciones = direcciones + "N" + auxnext4.getContadorNodo() + "-> N" + auxnext4.getListTransiciones()[j].getDireccion() + "[label = \"" + auxnext4.getListTransiciones()[j].getNombre() + "\"]; \n";
+
+                                        }
+
+
+
+
+
+                                        if (auxnext4.getNext2() != null)
+                                        {
+                                            auxnext5 = auxnext4.getNext2();
+                                            while (auxnext5 != null)
+                                            {
+                                                nodos = nodos + "N" + auxnext5.getContadorNodo() + ";  \n";
+                                                for (int j = 0; j < auxnext5.getListTransiciones().Count(); j++)
+                                                {
+                                                    direcciones = direcciones + "N" + auxnext5.getContadorNodo() + "-> N" + auxnext5.getListTransiciones()[j].getDireccion() + "[label = \"" + auxnext5.getListTransiciones()[j].getNombre() + "\"]; \n";
+
+                                                }
+
+                                                auxnext5 = auxnext5.getNext1();
+                                            }
+                                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        auxnext4 = auxnext4.getNext1();
+                                    }
+                                }
+
+
+
+
+
+
+
+
+
+                                auxnext3 = auxnext3.getNext1();
+                            }
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         auxnext2 = auxnext2.getNext1();
                               }
                     }

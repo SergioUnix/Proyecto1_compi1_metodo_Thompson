@@ -1,0 +1,27 @@
+digraph finite_state_machine { 
+rankdir = LR; size = "30" 
+node [shape = point ]; qi
+node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  i
+node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
+ qi ->a
+a; 
+b; 
+d; 
+e; 
+f; 
+g; 
+h; 
+i; 
+a-> b[label = "D"];  
+b-> b[label = "D"];  
+b-> d[label = "."];  
+d-> e[label = "D"];  
+e-> e[label = "D"];  
+e-> f[label = "."];  
+f-> g[label = "D"];  
+g-> g[label = "D"];  
+g-> h[label = "."];  
+h-> i[label = "D"];  
+i-> i[label = "D"];  
+} 
+

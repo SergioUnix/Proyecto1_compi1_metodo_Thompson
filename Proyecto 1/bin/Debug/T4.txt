@@ -1,0 +1,129 @@
+digraph tabla{
+rankdir = LR; size = "30"
+tbl[ shape = plaintext 
+label =< 
+<table border = '2' cellborder = '1' color = 'black' cellspacing = '4' bgcolor="white"> 
+<tr> 
+<td color ="black" colspan = '5'> TRANSICIONES </td> 
+</tr> 
+<tr>
+	 	 <td color ="grey">Estados</td> 
+	 	 <td color ="black">L</td> 
+	 	 <td color ="black">.</td> 
+	 	 <td color ="black">-</td> 
+	 	 <td color ="black">/</td> 
+	 	 <td color ="black">_</td> 
+	 	 <td color ="black">D</td> 
+</tr>
+<tr>
+<td color ="grey">a</td> 
+	 	 <td color ="black">b</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">b</td> 
+	 	 <td color ="black">d</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">e</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">d</td> 
+	 	 <td color ="black">d</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">e</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">e</td> 
+	 	 <td color ="black">f</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">f</td> 
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">g</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">g</td> 
+	 	 <td color ="black">h</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">h</td> 
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">i</td>  
+	 	 <td color ="black">j</td>  
+	 	 <td color ="black">k</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">i</td> 
+	 	 <td color ="black">l</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">j</td> 
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">i</td>  
+	 	 <td color ="black">j</td>  
+	 	 <td color ="black">k</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">k</td> 
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">i</td>  
+	 	 <td color ="black">j</td>  
+	 	 <td color ="black">k</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">l</td> 
+	 	 <td color ="black">m</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+<tr>
+<td color ="grey">m</td> 
+	 	 <td color ="black">m</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+</tr>  
+</table> 
+>]; 
+}
+

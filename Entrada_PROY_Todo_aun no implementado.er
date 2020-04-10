@@ -1,0 +1,33 @@
+<!
+  Con respecto a el conjunto todo
+  se pudo tomar de la forma uno o
+  de la forma dos por lo cual al
+  momento de la calificacion deben
+  informar que tipo es el que utilizaron
+!>
+
+CONJ: letras -> a~f;
+CONJ: LETRAS -> A~F;
+CONJ: digitos -> 0~9;
+CONJ: todo -> [:todo:];   //primera forma en la que se pudo tomar
+CONJ: todo -> [:ABDEFGHIJKLMNOPQTUVWZ:];     //segunda forna en la que se pudo tomar
+
+
+EXP1 -> . "#" * | | {letras} {LETRAS} {digitos};
+TODO -> * | | | {todo} "\n" "\r" "\t";
+
+EXP1: "#3C2E2E";//correcto
+EXP1: "#520A0A";//correcto
+EXP1: "#D88888";//correcto
+EXP1: "#41DA90";//correcto
+EXP1: "#591224";//correcto
+EXP1: "#BEB6B8";//correcto
+EXP1: "2#143EA";//incorrecto
+
+
+TODO: "ADB
+
+      EFG
+      HI
+      JKL";//correcto
+

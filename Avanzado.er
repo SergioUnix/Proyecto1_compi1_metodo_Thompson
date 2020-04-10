@@ -1,0 +1,89 @@
+
+//Definicion de conjuntos 
+CONJ: D -> 0~9;
+CONJ: L -> a~z;
+CONJ: cesp -> \n,\t;
+CONJ: ASCII ->!~} ;
+
+<!
+	Expresiones regulares basica
+
+	*********************************************
+	* ------------------------------------------*
+	* -------------INFIJA-----------------------*
+	* ------------------------------------------*
+	* -- MAIL -> L(L|D|_)*@LL*.LL* 	          --*
+	* -- UserInstagram -> @L(L|D|_)*          --*
+	* -- IP -> D+ "." D+ "." D+ "." D+        --*
+	* -- SSH -> LL*(-L)(/(L(L|D|_|/|-)*)).LL* --*
+	*-------------------------------------------*
+	*********************************************
+!>
+
+//Expresiones Regulares
+Mail -> .......{L} * || {L} {D} "_" "@" {L} *{L} "." {L} *{L};
+UserInstagram -> .."@" {L} * | | {L} {D} "_";
+IP -> ......+{D} "." +{D} "." +{D} "." +{D};
+SSH -> .........{L} *{L} "-" {L} "/" {L} *|||| {L} {D} "_" "/" "-" "." {L} *{L};
+
+
+<!
+	Definicion de lexemas
+!>
+
+//						MAIL
+//--------------------------------------------- VALIDO
+Mail: "fernandopaz1995@gmail.com";
+Mail: "joseg@yahoo.es // Valido";
+Mail: "pazfernando@hotmail.com";
+Mail: "jose_fernando_paz@usacedugt.com";
+Mail: "fjpaz____@midominio.cooooooooooooooooooooooooooooooom";
+//-----------------------------------------------------
+
+//-------------------------------------------- INVALIDO
+Mail: "19955FernandoPaz@hotmaillllllllllllllll.com";
+Mail: "_fherpaz@hotmail.com";
+Mail: "Jose_fernando_paz@usac.edu.gt.com";
+Mail: "Fjpaz____@mi-dominio.com";
+Mail: "PazFernando@hotmail.com11213";
+
+
+//error
+
+//				UserInstagram
+//--------------------------------------------- VALIDO
+UserInstagram: "@Fernando___________123Paz"; // Valido
+UserInstagram: "@JosePaz1234";
+UserInstagram: "@Fernando_Paz";
+//-----------------------------------------------------
+
+//-------------------------------------------- INVALIDO
+UserInstagram: "@1213FernandoJPaz"; //Invalido
+UserInstagram: "@fernandopazJ@@";
+UserInstagram: "123fernando_";
+UserInstagram: "FernandoPaz";
+//-----------------------------------------------------
+
+
+
+//				SSH
+SHH: "ssh-i/path/my-key-pair-pem-ec2-userec2-198-51-100-1-compute-1-amazonaws.com"; //Valido
+SHH: "ssh-i-/1path/my.-key-pair.pem-ec2-user@ec2-198-51-100-1-compute-1-amazonaws.com"; //INVALIDO
+
+//error Lexico
+
+
+//				IP
+//error lexico
+IP : "192.168.1.0";
+IP : "1555.026.0";
+
+<!
+	Fin del archivo
+!>
+
+<!
+	Hay errores lexicos en las lineas: 1-6,10,34,41,45
+!>
+
+

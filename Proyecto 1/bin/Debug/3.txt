@@ -1,36 +1,41 @@
-digraph G{ 
- rankdir=LR; 
-node100; 
-node98; 
-node99; 
-node94; 
-node95; 
-node97; 
-node93; 
-node88; 
-node89; 
-node87; 
-node82; 
-node83; 
-node85; 
-node91; 
-node100-> node98[label = "£"];  
-node98-> node99[label = "abecedario"];  
-node99-> node94[label = "£"];  
-node99-> node97[label = "£"];  
-node94-> node95[label = "abecedario"];  
-node95-> node97[label = "£"];  
-node95-> node94[label = "£"];  
-node97-> node93[label = "conjnum"];  
-node93-> node88[label = "£"];  
-node93-> node91[label = "£"];  
-node88-> node89[label = ":"];  
-node89-> node87[label = "abecedario"];  
-node87-> node82[label = "£"];  
-node87-> node85[label = "£"];  
-node82-> node83[label = "abecedario"];  
-node83-> node85[label = "£"];  
-node83-> node82[label = "£"];  
-node85-> node91[label = "£"];  
+digraph finite_state_machine { 
+rankdir = LR; size = "20" 
+node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N49
+node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
+N60; 
+N58; 
+N59; 
+N61; 
+N63; 
+N54; 
+N55; 
+N57; 
+N65; 
+N50; 
+N51; 
+N53; 
+N67; 
+N46; 
+N47; 
+N49; 
+N60-> N58[label = "£"];  
+N58-> N59[label = "D"];  
+N59-> N61[label = "£"];  
+N59-> N58[label = "£"];  
+N61-> N63[label = "."];  
+N63-> N54[label = "£"];  
+N54-> N55[label = "D"];  
+N55-> N57[label = "£"];  
+N55-> N54[label = "£"];  
+N57-> N65[label = "."];  
+N65-> N50[label = "£"];  
+N50-> N51[label = "D"];  
+N51-> N53[label = "£"];  
+N51-> N50[label = "£"];  
+N53-> N67[label = "."];  
+N67-> N46[label = "£"];  
+N46-> N47[label = "D"];  
+N47-> N49[label = "£"];  
+N47-> N46[label = "£"];  
 } 
 

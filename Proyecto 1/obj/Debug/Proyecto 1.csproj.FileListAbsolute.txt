@@ -7,3 +7,5 @@ C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1
 C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto 1.csproj.GenerateResource.Cache
 C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto 1.exe
 C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\obj\Debug\Proyecto 1.pdb
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\bin\Debug\itextsharp.dll
+C:\Users\ADMIN\OneDrive\Unix_OneDrive\GitHub y Bitbucket\GitHub\Compiladores 1 1S 2020\Proyecto 1\Proyecto 1\bin\Debug\itextsharp.xml

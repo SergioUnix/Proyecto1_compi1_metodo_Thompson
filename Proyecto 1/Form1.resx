@@ -118,33 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>//Definicion de mis conjuntos 
-CONJ: digito -&gt; 1~9;
-CONJ: letra -&gt; a~z;
-
-&lt;!
-	Expresiones regulares basica, intermedia, avanzada
+    <value>&lt;!
+   alungos conjuntos simples
 !&gt;
 
-//Expresiones Regulares
-er1 -&gt; . . . * |  {A} "B" "A" "B" "B";
+CONJ: letras -&gt; a~z;
+CONJ: enter -&gt; \n;
+CONJ: num -&gt; 0~9;
 
 
-&lt;!
-	Definicion de lexemas
-!&gt;
+EXP1 -&gt; . . . * | {enter} {letras} {letras} {enter} {enter};
+EXP2 -&gt; . +{letras}  . {num} ? . ":" +{letras};
 
-er1 : "abecedario_cadena1_cadena2";
-er1 : "z";
-er1 : "1uno"; //error
-er2 : "aaaa"; //error
-er2 : "bcdddd";
-er2 : "bcd";
-er2 : "ababcdabcdbc"; //error falta d al final
+EXP1: "enter
 
-&lt;!
-	Fin del archivo
-!&gt;
+espacio
+
+tabulador
+
+final
+
+"; //corecto
+EXP1: "
+
+otra"; //incorrecto
+
 </value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

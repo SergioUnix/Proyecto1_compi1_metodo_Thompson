@@ -1,0 +1,26 @@
+<!
+   alungos conjuntos simples
+!>
+
+CONJ: letras -> a~z;
+CONJ: enter -> \n;
+CONJ: num -> 0~9;
+
+
+EXP1 -> . . . * | {enter} {letras} {letras} {enter} {enter};
+EXP2 -> . +{letras}  . {num} ? . ":" +{letras};
+
+EXP1: "enter
+
+espacio
+
+tabulador
+
+final
+
+"; //corecto
+EXP1: "
+
+otra"; //incorrecto
+
+

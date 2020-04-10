@@ -1,8 +1,7 @@
 digraph finite_state_machine { 
-rankdir = LR; size = "8,5" 
+rankdir = LR; size = "20" 
 node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N13
 node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
-N14; 
 N6; 
 N4; 
 N0;  
@@ -14,19 +13,18 @@ N7;
 N9; 
 N11; 
 N13; 
-N14-> N6[label = "£"];  
 N6-> N4[label = "£"];  
 N6-> N7[label = "£"];  
 N4-> N2[label = "£"];  
 N4-> N0[label = "£"];  
-N0-> N1[label = "B"]; 
+N0-> N1[label = "letras"]; 
 N1-> N5[label = "£"]; 
-N2-> N3[label = "A"];  
+N2-> N3[label = "enter"];  
 N3-> N5[label = "£"];  
 N5-> N7[label = "£"];  
 N5-> N4[label = "£"];  
-N7-> N9[label = "A"];  
-N9-> N11[label = "B"];  
-N11-> N13[label = "B"];  
+N7-> N9[label = "letras"];  
+N9-> N11[label = "enter"];  
+N11-> N13[label = "enter"];  
 } 
 

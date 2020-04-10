@@ -1,0 +1,19 @@
+digraph finite_state_machine { 
+rankdir = LR; size = "30" 
+node [shape = point ]; qi
+node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  d f
+node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
+ qi ->a
+a; 
+b; 
+d; 
+e; 
+f; 
+a-> b[label = "letras"];  
+b-> b[label = "letras"];  
+b-> d[label = "num"];  
+d-> e[label = ":"];  
+e-> f[label = "letras"];  
+f-> f[label = "letras"];  
+} 
+
