@@ -8,38 +8,44 @@ label =<
 </tr> 
 <tr>
 	 	 <td color ="grey">Estados</td> 
-	 	 <td color ="black">letras</td> 
-	 	 <td color ="black">:</td> 
-	 	 <td color ="black">num</td> 
+	 	 <td color ="black">_</td> 
+	 	 <td color ="black">D</td> 
+	 	 <td color ="black">L</td> 
+	 	 <td color ="black">@</td> 
 </tr>
 <tr>
 <td color ="grey">a</td> 
-	 	 <td color ="black">b</td>  
 	 	 <td color ="black">--</td>  
 	 	 <td color ="black">--</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">c</td>  
 </tr>  
 <tr>
-<td color ="grey">b</td> 
-	 	 <td color ="black">b</td>  
+<td color ="grey">c</td> 
+	 	 <td color ="black">--</td>  
 	 	 <td color ="black">--</td>  
 	 	 <td color ="black">d</td>  
+	 	 <td color ="black">--</td>  
 </tr>  
 <tr>
 <td color ="grey">d</td> 
-	 	 <td color ="black">--</td>  
 	 	 <td color ="black">e</td>  
+	 	 <td color ="black">--</td>  
+	 	 <td color ="black">f</td>  
 	 	 <td color ="black">--</td>  
 </tr>  
 <tr>
 <td color ="grey">e</td> 
-	 	 <td color ="black">f</td>  
+	 	 <td color ="black">e</td>  
 	 	 <td color ="black">--</td>  
+	 	 <td color ="black">f</td>  
 	 	 <td color ="black">--</td>  
 </tr>  
 <tr>
 <td color ="grey">f</td> 
-	 	 <td color ="black">f</td>  
+	 	 <td color ="black">e</td>  
 	 	 <td color ="black">--</td>  
+	 	 <td color ="black">f</td>  
 	 	 <td color ="black">--</td>  
 </tr>  
 </table> 

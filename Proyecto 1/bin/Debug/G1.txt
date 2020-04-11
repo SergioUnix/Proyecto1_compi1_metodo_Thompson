@@ -1,23 +1,36 @@
 digraph finite_state_machine { 
 rankdir = LR; size = "30" 
 node [shape = point ]; qi
-node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  e
+node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  j k
 node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
  qi ->a
 a; 
 b; 
-c; 
 d; 
 e; 
-a-> b[label = "enter"];  
-a-> c[label = "letras"];  
-b-> b[label = "enter"];  
-b-> c[label = "letras"];  
-c-> d[label = "enter"];  
-c-> c[label = "letras"];  
-d-> e[label = "enter"];  
-d-> c[label = "letras"];  
-e-> b[label = "enter"];  
-e-> c[label = "letras"];  
+f; 
+g; 
+h; 
+i; 
+j; 
+k; 
+a-> b[label = "L"];  
+b-> d[label = "L"];  
+b-> e[label = "@"];  
+b-> f[label = "_"];  
+d-> d[label = "L"];  
+d-> e[label = "@"];  
+d-> f[label = "_"];  
+e-> g[label = "L"];  
+f-> d[label = "L"];  
+f-> e[label = "@"];  
+f-> f[label = "_"];  
+g-> h[label = "L"];  
+g-> i[label = "."];  
+h-> h[label = "L"];  
+h-> i[label = "."];  
+i-> j[label = "L"];  
+j-> k[label = "L"];  
+k-> k[label = "L"];  
 } 
 

@@ -1,30 +1,37 @@
 digraph finite_state_machine { 
 rankdir = LR; size = "20" 
-node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N21
+node[shape = doublecircle margin = 0 fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];  N41
 node[margin = 0 fontcolor = white fontsize = 15 width = 0.5 shape = circle]; 
-N26; 
-N24; 
-N25; 
-N27; 
-N23; 
-N18; 
-N19; 
-N14; 
-N15; 
-N17; 
-N21; 
-N26-> N24[label = "£"];  
-N24-> N25[label = "letras"];  
-N25-> N27[label = "£"];  
-N25-> N24[label = "£"];  
-N27-> N23[label = "num"];  
-N23-> N18[label = "£"];  
-N23-> N21[label = "£"];  
-N18-> N19[label = ":"];  
-N19-> N14[label = "£"];  
-N14-> N15[label = "letras"];  
-N15-> N17[label = "£"];  
-N15-> N14[label = "£"];  
-N17-> N21[label = "£"];  
+N42; 
+N43; 
+N45; 
+N38; 
+N34;  
+N30;  
+N31;  
+N32;  
+N33;  
+N35;  
+N36; 
+N37; 
+N39; 
+N41; 
+N42-> N43[label = "@"];  
+N43-> N45[label = "L"];  
+N45-> N38[label = "£"];  
+N45-> N41[label = "£"];  
+N38-> N36[label = "£"];  
+N38-> N34[label = "£"];  
+N34-> N32[label = "£"]; 
+N34-> N30[label = "£"]; 
+N30-> N31[label = "D"]; 
+N31-> N35[label = "£"]; 
+N32-> N33[label = "L"]; 
+N33-> N35[label = "£"]; 
+N35-> N39[label = "£"]; 
+N36-> N37[label = "_"];  
+N37-> N39[label = "£"];  
+N39-> N41[label = "£"];  
+N39-> N38[label = "£"];  
 } 
 
